@@ -13,6 +13,13 @@
 //    SKLabelNode *_label;
     SKSpriteNode *paddle;
     SKShapeNode *ball;
+    
+    UInt32 BALL_CATEGORY;
+    UInt32 BOTTOM_CATEGORY;
+    UInt32 BLOCK_CATEGORY;
+    UInt32 PADDLE_CATEGORY;
+    UInt32 BORDER_CATEGORY;
+    
 }
 
 - (void)didMoveToView:(SKView *)view {
@@ -20,6 +27,7 @@
     
     
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+    self.physicsBody.friction = 0;
     
     paddle = (SKSpriteNode *)[self childNodeWithName:@"paddle"];
     float yCoord = (self.view.frame.size.height - paddle.frame.size.height) * -1;
@@ -43,11 +51,53 @@
     
     [self addChild:ball];
     
+    //Remove all gravity
+    self.physicsWorld.gravity = CGVectorMake(0, 0);
+    self.physicsWorld.contactDelegate = self;
     [ball.physicsBody applyImpulse:CGVectorMake(2, -2)];  //Needs to get called AFTER ball is added to scene
     
+    //Set up constant category names
+    BALL_CATEGORY = 0x1 << 0;
+    BOTTOM_CATEGORY = 0x1 << 1;
+    BLOCK_CATEGORY = 0X1 << 2;
+    PADDLE_CATEGORY = 0x1 << 3;
+    BORDER_CATEGORY = 0x1 << 4;
     
     
+    //Set up physics body for bottom of screen
+    SKNode *bottom = [[SKNode alloc] init];
+    CGRect bottomRect = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, 1);
+    bottom.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:bottomRect];
+    [self addChild:bottom];
     
+    //Set up category bit masks
+    bottom.physicsBody.categoryBitMask = BOTTOM_CATEGORY;
+    ball.physicsBody.categoryBitMask = BALL_CATEGORY;
+    paddle.physicsBody.categoryBitMask = PADDLE_CATEGORY;
+    self.physicsBody.categoryBitMask = BORDER_CATEGORY;
+    
+    //Notify contact delegate when ball touches bottom of screen
+    ball.physicsBody.contactTestBitMask = BOTTOM_CATEGORY;
+}
+
+-(void)didBeginContact:(SKPhysicsContact *)contact{
+    NSLog(@"IN DID BEGIN CONTACT");
+    SKPhysicsBody *firstBody;
+    SKPhysicsBody *secondBody;
+    
+    //Ensure body with the lower category bitmask is stored in firstBody
+    if(contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask){
+        firstBody = contact.bodyA;
+        secondBody = contact.bodyB;
+    }
+    else{
+        firstBody = contact.bodyB;
+        secondBody = contact.bodyA;
+    }
+    
+    if(firstBody.categoryBitMask == BALL_CATEGORY && secondBody.categoryBitMask == BOTTOM_CATEGORY){
+        NSLog(@"Ball hit the bottom");
+    }
 }
 
 
