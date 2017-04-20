@@ -12,6 +12,7 @@
 //    SKShapeNode *_spinnyNode;
 //    SKLabelNode *_label;
     SKSpriteNode *paddle;
+    SKShapeNode *ball;
 }
 
 - (void)didMoveToView:(SKView *)view {
@@ -23,31 +24,30 @@
     paddle = (SKSpriteNode *)[self childNodeWithName:@"paddle"];
     float yCoord = (self.view.frame.size.height - paddle.frame.size.height) * -1;
     
-    
     paddle.position = CGPointMake(0, yCoord);
     paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:paddle.frame.size];
     paddle.physicsBody.dynamic = NO;
     
-/*
-    // Get label node from scene and store it for use later
-    _label = (SKLabelNode *)[self childNodeWithName:@"//helloLabel"];
+    ball = [SKShapeNode shapeNodeWithCircleOfRadius:20];
+    ball.strokeColor = [UIColor greenColor];
+    ball.fillColor = [UIColor greenColor];
+    ball.position = CGPointMake(0, self.frame.size.height/4);
     
-    _label.alpha = 0.0;
-    [_label runAction:[SKAction fadeInWithDuration:2.0]];
     
-    CGFloat w = (self.size.width + self.size.height) * 0.05;
+    ball.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:20];
+    ball.physicsBody.friction = 0;
+    ball.physicsBody.restitution = 1;
+    ball.physicsBody.linearDamping = 0;
+    ball.physicsBody.allowsRotation = NO;
+    ball.physicsBody.dynamic = YES;
     
-    // Create shape node to use during mouse interaction
-    _spinnyNode = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(w, w) cornerRadius:w * 0.3];
-    _spinnyNode.lineWidth = 2.5;
+    [self addChild:ball];
     
-    [_spinnyNode runAction:[SKAction repeatActionForever:[SKAction rotateByAngle:M_PI duration:1]]];
-    [_spinnyNode runAction:[SKAction sequence:@[
-                                                [SKAction waitForDuration:0.5],
-                                                [SKAction fadeOutWithDuration:0.5],
-                                                [SKAction removeFromParent],
-                                                ]]];
-*/
+    [ball.physicsBody applyImpulse:CGVectorMake(2, -2)];  //Needs to get called AFTER ball is added to scene
+    
+    
+    
+    
 }
 
 
