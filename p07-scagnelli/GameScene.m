@@ -21,11 +21,14 @@
     UInt32 PADDLE_CATEGORY;
     UInt32 BORDER_CATEGORY;
     
+    bool fixedIt;
+    
 }
 
 - (void)didMoveToView:(SKView *)view {
     // Setup your scene here
     
+    fixedIt = NO;
     
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     self.physicsBody.friction = 0;
@@ -180,8 +183,35 @@
 }
 
 
+//Called before each frame is rendered
 -(void)update:(CFTimeInterval)currentTime {
-    // Called before each frame is rendered
+    /*
+     * Prevent ball from getting stuck
+     */
+    if(ball.physicsBody.velocity.dx == 0){
+        if(ball.position.x < 0){
+            NSLog(@"x is 0 on left");
+            [ball.physicsBody applyImpulse:CGVectorMake(5, 0)];
+        }
+        else{
+            NSLog(@"x is 0 on right");
+            [ball.physicsBody applyImpulse:CGVectorMake(-5, 0)];
+        }
+        fixedIt = YES;
+    }
+    
+    if(ball.physicsBody.velocity.dy == 0){
+        if(ball.position.y < 0){ //Ball against the bottom of screen
+            NSLog(@"y is 0 on bottom");
+            [ball.physicsBody applyImpulse:CGVectorMake(0, 5)]; //Push ball up
+        }
+        else{ //Ball is against top of screen
+            NSLog(@"y is 0 on top");
+            [ball.physicsBody applyImpulse:CGVectorMake(0, -5)]; //Push ball down
+        }
+        fixedIt = YES;
+    }
 }
+
 
 @end
