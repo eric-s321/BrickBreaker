@@ -80,9 +80,35 @@
     self.physicsBody.categoryBitMask = BORDER_CATEGORY;
     
     //Notify contact delegate when ball touches bottom of screen
-    ball.physicsBody.contactTestBitMask = BOTTOM_CATEGORY;
+    ball.physicsBody.contactTestBitMask = BOTTOM_CATEGORY | BLOCK_CATEGORY;
+    
+
+////////////////////BRICK SETUP/////////////////////////////////////////////////////////////////
+    int BLOCK_WIDTH = 150;
+    int BLOCK_HEIGHT = 30;
+    float x = ((self.view.frame.size.width / 4.0) * -1) - BLOCK_WIDTH / 2;
+//    x = -300;
+    NSLog(@"X is %f", x);
+    NSLog(@"width is %f", self.view.frame.size.width);
+    float y = 100.0;
+    for (int i = 0; i < 5; i++){
+        SKShapeNode *badBlock = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(BLOCK_WIDTH, BLOCK_HEIGHT)];
+        badBlock.strokeColor = [UIColor blueColor];
+        badBlock.fillColor = [UIColor blueColor];
+        badBlock.position = CGPointMake(x, y);
+        badBlock.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:badBlock.frame.size];
+        badBlock.physicsBody.dynamic = NO;
+        badBlock.physicsBody.categoryBitMask = BLOCK_CATEGORY;
+        
+        y += 100;
+        
+        [self addChild:badBlock];
+        
+    }
 }
 
+
+//Called when contact with an object and anything in it's contactTestBitMask is detected
 -(void)didBeginContact:(SKPhysicsContact *)contact{
     SKPhysicsBody *firstBody;
     SKPhysicsBody *secondBody;
@@ -99,6 +125,10 @@
     
     if(firstBody.categoryBitMask == BALL_CATEGORY && secondBody.categoryBitMask == BOTTOM_CATEGORY){
         NSLog(@"Ball hit the bottom");
+    }
+    
+    if(firstBody.categoryBitMask == BALL_CATEGORY && secondBody.categoryBitMask == BLOCK_CATEGORY){
+        NSLog(@"Ball hit block!");
     }
 }
 

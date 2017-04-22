@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "p07-scagnelli/GameScene.m"
-            timestampString = "514528101.712128"
+            timestampString = "514533031.000523"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "-touchMovedToPoint:fromPoint:"
             landmarkType = "7">
             <Locations>
