@@ -9,7 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
 #import <GameplayKit/GameplayKit.h>
+#import "GameScene.h"
 
-@interface GameViewController : UIViewController
+@interface GameViewController : UIViewController{
+    GameScene *scene;
+}
+
+-(IBAction)pauseGame:(id)sender;
+-(IBAction)resumeGame:(UIStoryboardSegue *)segue;
 
 @end

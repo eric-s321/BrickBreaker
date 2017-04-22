@@ -13,6 +13,7 @@
 //    SKLabelNode *_label;
     SKSpriteNode *paddle;
     SKShapeNode *ball;
+    CGVector ballImpulse;
     
     UInt32 BALL_CATEGORY;
     UInt32 BOTTOM_CATEGORY;
@@ -51,10 +52,12 @@
     
     [self addChild:ball];
     
+    
     //Remove all gravity
     self.physicsWorld.gravity = CGVectorMake(0, 0);
     self.physicsWorld.contactDelegate = self;
-    [ball.physicsBody applyImpulse:CGVectorMake(2, -2)];  //Needs to get called AFTER ball is added to scene
+    ballImpulse = CGVectorMake(15, -30);  //Set impulse for the ball
+    [ball.physicsBody applyImpulse:ballImpulse];  //Needs to get called AFTER ball is added to scene
     
     //Set up constant category names
     BALL_CATEGORY = 0x1 << 0;
@@ -81,7 +84,6 @@
 }
 
 -(void)didBeginContact:(SKPhysicsContact *)contact{
-    NSLog(@"IN DID BEGIN CONTACT");
     SKPhysicsBody *firstBody;
     SKPhysicsBody *secondBody;
     

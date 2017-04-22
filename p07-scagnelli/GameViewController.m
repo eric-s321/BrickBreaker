@@ -7,7 +7,6 @@
 //
 
 #import "GameViewController.h"
-#import "GameScene.h"
 
 @implementation GameViewController
 
@@ -15,7 +14,7 @@
     [super viewDidLoad];
 
     // Load the SKScene from 'GameScene.sks'
-    GameScene *scene = (GameScene *)[SKScene nodeWithFileNamed:@"GameScene"];
+    scene = (GameScene *)[SKScene nodeWithFileNamed:@"GameScene"];
     
     // Set the scale mode to scale to fit the window
     scene.scaleMode = SKSceneScaleModeAspectFill;
@@ -49,6 +48,19 @@
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
+}
+
+-(IBAction)pauseGame:(id)sender{
+    scene.paused = YES;
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main"
+                                    bundle:[NSBundle mainBundle]];
+    UIViewController *pauseController = [storyBoard
+                instantiateViewControllerWithIdentifier:@"pauseController"];
+    [self presentViewController:pauseController animated:YES completion:nil];
+}
+
+-(IBAction)resumeGame:(UIStoryboardSegue *)segue{
+    scene.paused = NO;
 }
 
 @end

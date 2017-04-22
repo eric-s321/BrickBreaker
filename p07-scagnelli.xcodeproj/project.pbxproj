@@ -532,6 +532,7 @@
 				B67C23CF1EA862F100742831 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B67C23D01EA862F100742831 /* Build configuration list for PBXNativeTarget "p07-scagnelliTests" */ = {
 			isa = XCConfigurationList;
@@ -540,6 +541,7 @@
 				B67C23D21EA862F100742831 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B67C23D31EA862F100742831 /* Build configuration list for PBXNativeTarget "p07-scagnelliUITests" */ = {
 			isa = XCConfigurationList;
@@ -548,6 +550,7 @@
 				B67C23D51EA862F100742831 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
