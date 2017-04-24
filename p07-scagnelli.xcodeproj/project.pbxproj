@@ -14,10 +14,12 @@
 		B67C23A81EA862F100742831 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B67C23A71EA862F100742831 /* GameScene.m */; };
 		B67C23AB1EA862F100742831 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B67C23AA1EA862F100742831 /* GameViewController.m */; };
 		B67C23AE1EA862F100742831 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B67C23AC1EA862F100742831 /* Main.storyboard */; };
-		B67C23B01EA862F100742831 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B67C23AF1EA862F100742831 /* Assets.xcassets */; };
 		B67C23B31EA862F100742831 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B67C23B11EA862F100742831 /* LaunchScreen.storyboard */; };
 		B67C23BE1EA862F100742831 /* p07_scagnelliTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B67C23BD1EA862F100742831 /* p07_scagnelliTests.m */; };
 		B67C23C91EA862F100742831 /* p07_scagnelliUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B67C23C81EA862F100742831 /* p07_scagnelliUITests.m */; };
+		B67CDB771EADC42700B7B433 /* BrokenBlock.sks in Resources */ = {isa = PBXBuildFile; fileRef = B67CDB751EADC42700B7B433 /* BrokenBlock.sks */; };
+		B67CDB781EADC42700B7B433 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B67CDB761EADC42700B7B433 /* Assets.xcassets */; };
+		B67CDB7B1EADC63900B7B433 /* Block.m in Sources */ = {isa = PBXBuildFile; fileRef = B67CDB7A1EADC63900B7B433 /* Block.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +51,6 @@
 		B67C23A91EA862F100742831 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		B67C23AA1EA862F100742831 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		B67C23AD1EA862F100742831 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B67C23AF1EA862F100742831 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B67C23B21EA862F100742831 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B67C23B41EA862F100742831 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B67C23B91EA862F100742831 /* p07-scagnelliTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "p07-scagnelliTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +59,10 @@
 		B67C23C41EA862F100742831 /* p07-scagnelliUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "p07-scagnelliUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B67C23C81EA862F100742831 /* p07_scagnelliUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = p07_scagnelliUITests.m; sourceTree = "<group>"; };
 		B67C23CA1EA862F100742831 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B67CDB751EADC42700B7B433 /* BrokenBlock.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BrokenBlock.sks; sourceTree = "<group>"; };
+		B67CDB761EADC42700B7B433 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B67CDB791EADC63900B7B433 /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
+		B67CDB7A1EADC63900B7B433 /* Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,11 +121,14 @@
 				B67C23A71EA862F100742831 /* GameScene.m */,
 				B67C23A91EA862F100742831 /* GameViewController.h */,
 				B67C23AA1EA862F100742831 /* GameViewController.m */,
+				B67CDB791EADC63900B7B433 /* Block.h */,
+				B67CDB7A1EADC63900B7B433 /* Block.m */,
 				B67C23AC1EA862F100742831 /* Main.storyboard */,
-				B67C23AF1EA862F100742831 /* Assets.xcassets */,
 				B67C23B11EA862F100742831 /* LaunchScreen.storyboard */,
 				B67C23B41EA862F100742831 /* Info.plist */,
+				B67CDB751EADC42700B7B433 /* BrokenBlock.sks */,
 				B67C239C1EA862F100742831 /* Supporting Files */,
+				B67CDB761EADC42700B7B433 /* Assets.xcassets */,
 			);
 			path = "p07-scagnelli";
 			sourceTree = "<group>";
@@ -262,9 +270,10 @@
 			files = (
 				B67C23AE1EA862F100742831 /* Main.storyboard in Resources */,
 				B67C23A31EA862F100742831 /* GameScene.sks in Resources */,
-				B67C23B01EA862F100742831 /* Assets.xcassets in Resources */,
 				B67C23B31EA862F100742831 /* LaunchScreen.storyboard in Resources */,
 				B67C23A51EA862F100742831 /* Actions.sks in Resources */,
+				B67CDB781EADC42700B7B433 /* Assets.xcassets in Resources */,
+				B67CDB771EADC42700B7B433 /* BrokenBlock.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +301,7 @@
 				B67C23AB1EA862F100742831 /* GameViewController.m in Sources */,
 				B67C23A11EA862F100742831 /* AppDelegate.m in Sources */,
 				B67C23A81EA862F100742831 /* GameScene.m in Sources */,
+				B67CDB7B1EADC63900B7B433 /* Block.m in Sources */,
 				B67C239E1EA862F100742831 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
