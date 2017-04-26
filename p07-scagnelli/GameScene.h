@@ -10,4 +10,9 @@
 
 @interface GameScene : SKScene <SKPhysicsContactDelegate>
 
+-(void)didMoveToView:(SKView *)view;
+-(void)didBeginContact:(SKPhysicsContact *)contact;
+-(void)boundVelocity;
+
+
 @end

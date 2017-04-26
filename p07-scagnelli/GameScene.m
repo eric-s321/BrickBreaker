@@ -44,7 +44,7 @@
     ball = [SKShapeNode shapeNodeWithCircleOfRadius:20];
     ball.strokeColor = [UIColor greenColor];
     ball.fillColor = [UIColor greenColor];
-    ball.position = CGPointMake(0, self.frame.size.height/4);
+    ball.position = CGPointMake(0, self.frame.size.height/8);
     
     
     ball.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:20];
@@ -84,23 +84,34 @@
     self.physicsBody.categoryBitMask = BORDER_CATEGORY;
     
     //Notify contact delegate when ball touches bottom of screen
-    ball.physicsBody.contactTestBitMask = BOTTOM_CATEGORY | BLOCK_CATEGORY;
+    ball.physicsBody.contactTestBitMask = BOTTOM_CATEGORY | BLOCK_CATEGORY | PADDLE_CATEGORY;
     
 
 ////////////////////BLOCK SETUP/////////////////////////////////////////////////////////////////
     int BLOCK_WIDTH = 150;
     int BLOCK_HEIGHT = 30;
-    float x = ((self.view.frame.size.width / 4.0) * -1) - BLOCK_WIDTH / 2;
-    float y = 100.0;
+    float leftx = ((self.view.frame.size.width / 4.0) * -1) - BLOCK_WIDTH / 2;
+    float lefty = 100.0;
+    float rightx = (self.view.frame.size.width / 4.0) + BLOCK_WIDTH / 2;
+    float righty = 100.0;
     
-    for (int i = 0; i < 5; i++){
-        Block *block = [[Block alloc] initWithRect:CGRectMake(x, y, BLOCK_WIDTH, BLOCK_HEIGHT)
-                                             color:[UIColor blueColor]];
-        block.physicsBody.categoryBitMask = BLOCK_CATEGORY;
-        
-        y += 100;
-        
-        [self addChild:block];
+    for (int i = 0; i < 8; i++){
+        if (i < 4){
+            Block *block = [[Block alloc] initWithRect:CGRectMake(leftx, lefty, BLOCK_WIDTH, BLOCK_HEIGHT)
+                                                 color:[UIColor blueColor]];
+            block.physicsBody.categoryBitMask = BLOCK_CATEGORY;
+            
+            lefty += 100;
+            [self addChild:block];
+        }
+        else{
+            Block *block = [[Block alloc] initWithRect:CGRectMake(rightx, righty, BLOCK_WIDTH, BLOCK_HEIGHT)
+                                                 color:[UIColor blueColor]];
+            block.physicsBody.categoryBitMask = BLOCK_CATEGORY;
+            
+            righty += 100;
+            [self addChild:block];
+        }
     }
 }
 
@@ -129,6 +140,45 @@
         Block *block = (Block *)[secondBody node];
         [block breakBlock];
     }
+    
+    if(firstBody.categoryBitMask == BALL_CATEGORY && secondBody.categoryBitMask == PADDLE_CATEGORY){
+        NSLog(@"Ball hit paddle");
+        
+        float contactPointX = contact.contactPoint.x;//x coord of collision point
+        float paddlePosX = paddle.position.x; //x coord of the center of the paddle
+        
+        float distanceFromCenter;
+        float VELOCITY_CONSTANT = 2;
+        if(contactPointX < paddlePosX){ //Ball hit left side of paddle
+            NSLog(@"LEFT");
+            distanceFromCenter = paddlePosX - contactPointX;
+            NSLog(@"%f", distanceFromCenter);
+            //Move ball to left
+            ball.physicsBody.velocity = CGVectorMake(distanceFromCenter * VELOCITY_CONSTANT * -1, ball.physicsBody.velocity.dy);
+        }
+        else{
+            NSLog(@"RIGHT");
+            distanceFromCenter = contactPointX - paddlePosX;
+            NSLog(@"%f", distanceFromCenter);
+            //Move ball to right
+            ball.physicsBody.velocity = CGVectorMake(distanceFromCenter * VELOCITY_CONSTANT, ball.physicsBody.velocity.dy);
+        }
+        [self boundVelocity];
+    }
+}
+
+- (void)boundVelocity{
+    NSLog(@"BEFORE\nBall velocity dx = %f dy = %f", ball.physicsBody.velocity.dx, ball.physicsBody.velocity.dy);
+    if(ball.physicsBody.velocity.dx > 500){
+        ball.physicsBody.velocity = CGVectorMake(500, ball.physicsBody.velocity.dy);
+    }
+    if(ball.physicsBody.velocity.dx < -500){
+        ball.physicsBody.velocity = CGVectorMake(500, ball.physicsBody.velocity.dy);
+    }
+    if(ball.physicsBody.velocity.dy < 550){
+        ball.physicsBody.velocity = CGVectorMake(ball.physicsBody.velocity.dx, 550);
+    }
+    NSLog(@"AFTER\nBall velocity dx = %f dy = %f", ball.physicsBody.velocity.dx, ball.physicsBody.velocity.dy);
 }
 
 
@@ -155,13 +205,9 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    // Run 'Pulse' action from 'Actions.sks'
-/*
-    [_label runAction:[SKAction actionNamed:@"Pulse"] withKey:@"fadeInOut"];
     
-    for (UITouch *t in touches) {[self touchDownAtPoint:[t locationInNode:self]];}
-*/
 }
+
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     for (UITouch *t in touches)
     {
@@ -169,11 +215,13 @@
         [self touchMovedToPoint:[t locationInNode:self] fromPoint:oldLocation];
     }
 }
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     for (UITouch *t in touches){
         [self touchUpAtPoint:[t locationInNode:self]];
     }
 }
+
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     for (UITouch *t in touches) {[self touchUpAtPoint:[t locationInNode:self]];}
 }
