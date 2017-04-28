@@ -10,8 +10,6 @@
 #import "Block.h"
 
 @implementation GameScene {
-//    SKShapeNode *_spinnyNode;
-//    SKLabelNode *_label;
     SKSpriteNode *paddle;
     SKShapeNode *ball;
     CGVector ballImpulse;
@@ -21,21 +19,19 @@
     UInt32 BLOCK_CATEGORY;
     UInt32 PADDLE_CATEGORY;
     UInt32 BORDER_CATEGORY;
-    
-    bool fixedIt;
-    
 }
 
 - (void)didMoveToView:(SKView *)view {
     // Setup your scene here
-    
-    fixedIt = NO;
-    
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     self.physicsBody.friction = 0;
     
+    //Remove all gravity
+    self.physicsWorld.gravity = CGVectorMake(0, 0);
+    self.physicsWorld.contactDelegate = self;
+    
     paddle = (SKSpriteNode *)[self childNodeWithName:@"paddle"];
-    float yCoord = (self.view.frame.size.height - paddle.frame.size.height) * -1;
+    float yCoord = (self.view.frame.size.height - paddle.frame.size.height*2.5) * -1;
     
     paddle.position = CGPointMake(0, yCoord);
     paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:paddle.frame.size];
@@ -46,22 +42,15 @@
     ball.fillColor = [UIColor greenColor];
     ball.position = CGPointMake(0, self.frame.size.height/8);
     
-    
     ball.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:20];
     ball.physicsBody.friction = 0;
     ball.physicsBody.restitution = 1;
     ball.physicsBody.linearDamping = 0;
     ball.physicsBody.allowsRotation = NO;
-    ball.physicsBody.dynamic = YES;
+    ball.physicsBody.dynamic = NO;  //Start ball stationary
+    ball.physicsBody.velocity = CGVectorMake(0, 0);
     
     [self addChild:ball];
-    
-    
-    //Remove all gravity
-    self.physicsWorld.gravity = CGVectorMake(0, 0);
-    self.physicsWorld.contactDelegate = self;
-    ballImpulse = CGVectorMake(15, -30);  //Set impulse for the ball
-    [ball.physicsBody applyImpulse:ballImpulse];  //Needs to get called AFTER ball is added to scene
     
     //Set up constant category names
     BALL_CATEGORY = 0x1 << 0;
@@ -69,7 +58,6 @@
     BLOCK_CATEGORY = 0X1 << 2;
     PADDLE_CATEGORY = 0x1 << 3;
     BORDER_CATEGORY = 0x1 << 4;
-    
     
     //Set up physics body for bottom of screen
     SKNode *bottom = [[SKNode alloc] init];
@@ -83,38 +71,27 @@
     paddle.physicsBody.categoryBitMask = PADDLE_CATEGORY;
     self.physicsBody.categoryBitMask = BORDER_CATEGORY;
     
-    //Notify contact delegate when ball touches bottom of screen
+    //Notify contact delegate when ball touches other objects
     ball.physicsBody.contactTestBitMask = BOTTOM_CATEGORY | BLOCK_CATEGORY | PADDLE_CATEGORY;
     
-
-////////////////////BLOCK SETUP/////////////////////////////////////////////////////////////////
-    int BLOCK_WIDTH = 150;
-    int BLOCK_HEIGHT = 30;
-    float leftx = ((self.view.frame.size.width / 4.0) * -1) - BLOCK_WIDTH / 2;
-    float lefty = 100.0;
-    float rightx = (self.view.frame.size.width / 4.0) + BLOCK_WIDTH / 2;
-    float righty = 100.0;
+    currentLevel = [[Level alloc] init];
+    [currentLevel createBlocks];
     
-    for (int i = 0; i < 8; i++){
-        if (i < 4){
-            Block *block = [[Block alloc] initWithRect:CGRectMake(leftx, lefty, BLOCK_WIDTH, BLOCK_HEIGHT)
-                                                 color:[UIColor blueColor]];
-            block.physicsBody.categoryBitMask = BLOCK_CATEGORY;
-            
-            lefty += 100;
-            [self addChild:block];
-        }
-        else{
-            Block *block = [[Block alloc] initWithRect:CGRectMake(rightx, righty, BLOCK_WIDTH, BLOCK_HEIGHT)
-                                                 color:[UIColor blueColor]];
-            block.physicsBody.categoryBitMask = BLOCK_CATEGORY;
-            
-            righty += 100;
-            [self addChild:block];
-        }
+    //Add blocks to screen
+    for (Block *block in currentLevel.blocks){
+        [self addChild:block];
     }
 }
 
+-(void)levelSetup:(int)startingScore{
+    [_gameDelegate setUpLevel:startingScore];
+    
+    tapScreenLabel = [[SKLabelNode alloc] initWithFontNamed:@"Avenir"];
+    tapScreenLabel.fontSize = 30;
+    tapScreenLabel.text = [NSString stringWithFormat:@"Tap Screen to Start"];
+    
+    [self addChild:tapScreenLabel];
+}
 
 //Called when contact with an object and anything in it's contactTestBitMask is detected
 -(void)didBeginContact:(SKPhysicsContact *)contact{
@@ -139,10 +116,13 @@
         NSLog(@"Ball hit block!");
         Block *block = (Block *)[secondBody node];
         [block breakBlock];
+        [_gameDelegate levelScoreChanged:100];
     }
     
     if(firstBody.categoryBitMask == BALL_CATEGORY && secondBody.categoryBitMask == PADDLE_CATEGORY){
         NSLog(@"Ball hit paddle");
+        if(!currentLevel.levelBegan) //First time ball hit paddle in this level
+            currentLevel.levelBegan = YES;
         
         float contactPointX = contact.contactPoint.x;//x coord of collision point
         float paddlePosX = paddle.position.x; //x coord of the center of the paddle
@@ -200,8 +180,13 @@
     paddle.position = CGPointMake(newX, paddle.position.y);
 }
 
-- (void)touchUpAtPoint:(CGPoint)pos {
-   
+- (void)touchUpAtPoint:(CGPoint)pos{
+    if(!currentLevel.levelBegan){
+        ball.physicsBody.dynamic = YES; //Allow ball to move
+        ballImpulse = CGVectorMake(0, -30);  //Set impulse for the ball
+        [ball.physicsBody applyImpulse:ballImpulse];
+        [tapScreenLabel removeFromParent];
+    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -232,30 +217,29 @@
     /*
      * Prevent ball from getting stuck
      */
-    if(ball.physicsBody.velocity.dx == 0){
-        if(ball.position.x < 0){
-            NSLog(@"x is 0 on left");
-            [ball.physicsBody applyImpulse:CGVectorMake(5, 0)];
+    if(currentLevel.levelBegan){
+        if(ball.physicsBody.velocity.dx == 0){
+            if(ball.position.x < 0){
+                NSLog(@"x is 0 on left");
+                [ball.physicsBody applyImpulse:CGVectorMake(5, 0)];
+            }
+            else{
+                NSLog(@"x is 0 on right");
+                [ball.physicsBody applyImpulse:CGVectorMake(-5, 0)];
+            }
         }
-        else{
-            NSLog(@"x is 0 on right");
-            [ball.physicsBody applyImpulse:CGVectorMake(-5, 0)];
+        
+        if(ball.physicsBody.velocity.dy == 0){
+            if(ball.position.y < 0){ //Ball against the bottom of screen
+                NSLog(@"y is 0 on bottom");
+                [ball.physicsBody applyImpulse:CGVectorMake(0, 5)]; //Push ball up
+            }
+            else{ //Ball is against top of screen
+                NSLog(@"y is 0 on top");
+                [ball.physicsBody applyImpulse:CGVectorMake(0, -5)]; //Push ball down
+            }
         }
-        fixedIt = YES;
-    }
-    
-    if(ball.physicsBody.velocity.dy == 0){
-        if(ball.position.y < 0){ //Ball against the bottom of screen
-            NSLog(@"y is 0 on bottom");
-            [ball.physicsBody applyImpulse:CGVectorMake(0, 5)]; //Push ball up
-        }
-        else{ //Ball is against top of screen
-            NSLog(@"y is 0 on top");
-            [ball.physicsBody applyImpulse:CGVectorMake(0, -5)]; //Push ball down
-        }
-        fixedIt = YES;
     }
 }
-
 
 @end

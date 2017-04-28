@@ -11,9 +11,15 @@
 #import <GameplayKit/GameplayKit.h>
 #import "GameScene.h"
 
-@interface GameViewController : UIViewController{
+
+@interface GameViewController : UIViewController<GameDelegate>{
     GameScene *scene;
+    int totalScoreInt;
+    int levelScoreInt;
 }
+
+@property (strong, nonatomic) IBOutlet UILabel *totalScoreLabel;
+@property (strong, nonatomic) IBOutlet UILabel *levelScoreLabel;
 
 -(IBAction)pauseGame:(id)sender;
 -(IBAction)resumeGame:(UIStoryboardSegue *)segue;
