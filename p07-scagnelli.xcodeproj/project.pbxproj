@@ -22,6 +22,7 @@
 		B67CDB7B1EADC63900B7B433 /* Block.m in Sources */ = {isa = PBXBuildFile; fileRef = B67CDB7A1EADC63900B7B433 /* Block.m */; };
 		B68368821EB2F1A80007EB3B /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = B68368811EB2F1A80007EB3B /* Level.m */; };
 		B68368851EB2FB870007EB3B /* Universe.m in Sources */ = {isa = PBXBuildFile; fileRef = B68368841EB2FB870007EB3B /* Universe.m */; };
+		B68368881EB3C6820007EB3B /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = B68368871EB3C6820007EB3B /* Star.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		B68368811EB2F1A80007EB3B /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level.m; sourceTree = "<group>"; };
 		B68368831EB2FB870007EB3B /* Universe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Universe.h; sourceTree = "<group>"; };
 		B68368841EB2FB870007EB3B /* Universe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Universe.m; sourceTree = "<group>"; };
+		B68368861EB3C6820007EB3B /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
+		B68368871EB3C6820007EB3B /* Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Star.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +134,8 @@
 				B68368841EB2FB870007EB3B /* Universe.m */,
 				B67CDB791EADC63900B7B433 /* Block.h */,
 				B67CDB7A1EADC63900B7B433 /* Block.m */,
+				B68368861EB3C6820007EB3B /* Star.h */,
+				B68368871EB3C6820007EB3B /* Star.m */,
 				B68368801EB2F1A80007EB3B /* Level.h */,
 				B68368811EB2F1A80007EB3B /* Level.m */,
 				B67C23AC1EA862F100742831 /* Main.storyboard */,
@@ -311,6 +316,7 @@
 				B68368821EB2F1A80007EB3B /* Level.m in Sources */,
 				B67C23AB1EA862F100742831 /* GameViewController.m in Sources */,
 				B68368851EB2FB870007EB3B /* Universe.m in Sources */,
+				B68368881EB3C6820007EB3B /* Star.m in Sources */,
 				B67C23A11EA862F100742831 /* AppDelegate.m in Sources */,
 				B67C23A81EA862F100742831 /* GameScene.m in Sources */,
 				B67CDB7B1EADC63900B7B433 /* Block.m in Sources */,

@@ -19,6 +19,8 @@
         self.size = rect.size;
         self.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.frame.size];
         self.physicsBody.dynamic = NO;
+        universe = [Universe sharedInstance];
+        self.physicsBody.categoryBitMask = universe.BLOCK_CATEGORY;
     }
     
     return self;

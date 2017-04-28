@@ -14,6 +14,7 @@
 }
 
 @property (strong, nonatomic) NSMutableArray *blocks;
+@property (strong, nonatomic) NSMutableArray *stars;
 @property (nonatomic) BOOL levelBegan;
 
 -(void)createBlocks;

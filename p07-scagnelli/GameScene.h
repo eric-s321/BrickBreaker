@@ -8,6 +8,7 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "Level.h"
+#import "Universe.h"
 
 @protocol GameDelegate
 -(void) levelScoreChanged:(int)difference;
@@ -18,6 +19,7 @@
 @interface GameScene : SKScene <SKPhysicsContactDelegate>{
     Level *currentLevel;
     SKLabelNode *tapScreenLabel;
+    Universe *universe;
 }
 
 @property (strong, nonatomic) id<GameDelegate> gameDelegate;

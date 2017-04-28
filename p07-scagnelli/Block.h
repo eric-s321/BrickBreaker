@@ -7,8 +7,11 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "Universe.h"
 
-@interface Block : SKSpriteNode
+@interface Block : SKSpriteNode{
+    Universe *universe;
+}
 
 -(id)initWithRect:(CGRect)rect color:(UIColor *)color;
 -(void)breakBlock;

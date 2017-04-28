@@ -8,6 +8,7 @@
 
 #import "Level.h"
 #import "Block.h"
+#import "Star.h"
 
 @implementation Level
 
@@ -17,6 +18,7 @@
     if(self){
         _levelBegan = NO;
         _blocks = [[NSMutableArray alloc] init];
+        _stars = [[NSMutableArray alloc] init];
         universe = [Universe sharedInstance];
     }
     return self;
@@ -35,20 +37,20 @@
         if (i < 4){
             Block *block = [[Block alloc] initWithRect:CGRectMake(leftx, lefty, BLOCK_WIDTH, BLOCK_HEIGHT)
                                                  color:[UIColor blueColor]];
-            block.physicsBody.categoryBitMask = universe.BLOCK_CATEGORY;
-            
             lefty += 100;
             [_blocks addObject:block];
         }
         else{
             Block *block = [[Block alloc] initWithRect:CGRectMake(rightx, righty, BLOCK_WIDTH, BLOCK_HEIGHT)
                                                  color:[UIColor blueColor]];
-            block.physicsBody.categoryBitMask = universe.BLOCK_CATEGORY;
-            
             righty += 100;
             [_blocks addObject:block];
         }
     }
+    
+    Star *star = [[Star alloc] initWithImageNamed:@"star" intRect:CGRectMake(0, 350, 75, 75) withValue:500];
+    
+    [_stars addObject:star];
 }
 
 

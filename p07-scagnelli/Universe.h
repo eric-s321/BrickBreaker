@@ -15,6 +15,7 @@
 @property (nonatomic) UInt32 BLOCK_CATEGORY;
 @property (nonatomic) UInt32 PADDLE_CATEGORY;
 @property (nonatomic) UInt32 BORDER_CATEGORY;
+@property (nonatomic) UInt32 STAR_CATEGORY;
 
 +(Universe *)sharedInstance;
 

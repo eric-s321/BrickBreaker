@@ -8,21 +8,18 @@
 
 #import "GameScene.h"
 #import "Block.h"
+#import "Star.h"
 
 @implementation GameScene {
     SKSpriteNode *paddle;
     SKShapeNode *ball;
     CGVector ballImpulse;
-    
-    UInt32 BALL_CATEGORY;
-    UInt32 BOTTOM_CATEGORY;
-    UInt32 BLOCK_CATEGORY;
-    UInt32 PADDLE_CATEGORY;
-    UInt32 BORDER_CATEGORY;
 }
 
 - (void)didMoveToView:(SKView *)view {
     // Setup your scene here
+    
+    universe = [Universe sharedInstance];
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     self.physicsBody.friction = 0;
     
@@ -52,34 +49,34 @@
     
     [self addChild:ball];
     
-    //Set up constant category names
-    BALL_CATEGORY = 0x1 << 0;
-    BOTTOM_CATEGORY = 0x1 << 1;
-    BLOCK_CATEGORY = 0X1 << 2;
-    PADDLE_CATEGORY = 0x1 << 3;
-    BORDER_CATEGORY = 0x1 << 4;
-    
     //Set up physics body for bottom of screen
     SKNode *bottom = [[SKNode alloc] init];
     CGRect bottomRect = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, 1);
     bottom.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:bottomRect];
     [self addChild:bottom];
     
+    
     //Set up category bit masks
-    bottom.physicsBody.categoryBitMask = BOTTOM_CATEGORY;
-    ball.physicsBody.categoryBitMask = BALL_CATEGORY;
-    paddle.physicsBody.categoryBitMask = PADDLE_CATEGORY;
-    self.physicsBody.categoryBitMask = BORDER_CATEGORY;
+    bottom.physicsBody.categoryBitMask = universe.BOTTOM_CATEGORY;
+    ball.physicsBody.categoryBitMask = universe.BALL_CATEGORY;
+    paddle.physicsBody.categoryBitMask = universe.PADDLE_CATEGORY;
+    self.physicsBody.categoryBitMask = universe.BORDER_CATEGORY;
     
     //Notify contact delegate when ball touches other objects
-    ball.physicsBody.contactTestBitMask = BOTTOM_CATEGORY | BLOCK_CATEGORY | PADDLE_CATEGORY;
+    ball.physicsBody.contactTestBitMask = universe.BOTTOM_CATEGORY | universe.BLOCK_CATEGORY |
+                    universe.PADDLE_CATEGORY | universe.STAR_CATEGORY;
     
     currentLevel = [[Level alloc] init];
     [currentLevel createBlocks];
     
     //Add blocks to screen
     for (Block *block in currentLevel.blocks){
+        NSLog(@"BLOCKKK");
         [self addChild:block];
+    }
+    for (SKSpriteNode *star in currentLevel.stars){
+        NSLog(@"STARRRR");
+        [self addChild:star];
     }
 }
 
@@ -108,42 +105,50 @@
         secondBody = contact.bodyA;
     }
     
-    if(firstBody.categoryBitMask == BALL_CATEGORY && secondBody.categoryBitMask == BOTTOM_CATEGORY){
-        NSLog(@"Ball hit the bottom");
-    }
-    
-    if(firstBody.categoryBitMask == BALL_CATEGORY && secondBody.categoryBitMask == BLOCK_CATEGORY){
-        NSLog(@"Ball hit block!");
-        Block *block = (Block *)[secondBody node];
-        [block breakBlock];
-        [_gameDelegate levelScoreChanged:100];
-    }
-    
-    if(firstBody.categoryBitMask == BALL_CATEGORY && secondBody.categoryBitMask == PADDLE_CATEGORY){
-        NSLog(@"Ball hit paddle");
-        if(!currentLevel.levelBegan) //First time ball hit paddle in this level
-            currentLevel.levelBegan = YES;
-        
-        float contactPointX = contact.contactPoint.x;//x coord of collision point
-        float paddlePosX = paddle.position.x; //x coord of the center of the paddle
-        
-        float distanceFromCenter;
-        float VELOCITY_CONSTANT = 2;
-        if(contactPointX < paddlePosX){ //Ball hit left side of paddle
-            NSLog(@"LEFT");
-            distanceFromCenter = paddlePosX - contactPointX;
-            NSLog(@"%f", distanceFromCenter);
-            //Move ball to left
-            ball.physicsBody.velocity = CGVectorMake(distanceFromCenter * VELOCITY_CONSTANT * -1, ball.physicsBody.velocity.dy);
+    if(firstBody.categoryBitMask == universe.BALL_CATEGORY){
+        if(secondBody.categoryBitMask == universe.BOTTOM_CATEGORY){
+            NSLog(@"Ball hit the bottom");
         }
-        else{
-            NSLog(@"RIGHT");
-            distanceFromCenter = contactPointX - paddlePosX;
-            NSLog(@"%f", distanceFromCenter);
-            //Move ball to right
-            ball.physicsBody.velocity = CGVectorMake(distanceFromCenter * VELOCITY_CONSTANT, ball.physicsBody.velocity.dy);
+        
+        if(secondBody.categoryBitMask == universe.BLOCK_CATEGORY){
+            NSLog(@"Ball hit block!");
+            Block *block = (Block *)[secondBody node];
+            [block breakBlock];
+            [_gameDelegate levelScoreChanged:100];
         }
-        [self boundVelocity];
+        
+        if(secondBody.categoryBitMask == universe.PADDLE_CATEGORY){
+            NSLog(@"Ball hit paddle");
+            if(!currentLevel.levelBegan) //First time ball hit paddle in this level
+                currentLevel.levelBegan = YES;
+            
+            float contactPointX = contact.contactPoint.x;//x coord of collision point
+            float paddlePosX = paddle.position.x; //x coord of the center of the paddle
+            
+            float distanceFromCenter;
+            float VELOCITY_CONSTANT = 2;
+            if(contactPointX < paddlePosX){ //Ball hit left side of paddle
+                NSLog(@"LEFT");
+                distanceFromCenter = paddlePosX - contactPointX;
+                NSLog(@"%f", distanceFromCenter);
+                //Move ball to left
+                ball.physicsBody.velocity = CGVectorMake(distanceFromCenter * VELOCITY_CONSTANT * -1, ball.physicsBody.velocity.dy);
+            }
+            else{
+                NSLog(@"RIGHT");
+                distanceFromCenter = contactPointX - paddlePosX;
+                NSLog(@"%f", distanceFromCenter);
+                //Move ball to right
+                ball.physicsBody.velocity = CGVectorMake(distanceFromCenter * VELOCITY_CONSTANT, ball.physicsBody.velocity.dy);
+            }
+            [self boundVelocity];
+        }
+        if(secondBody.categoryBitMask == universe.STAR_CATEGORY){
+            NSLog(@"Ball hit star");
+            Star *star = (Star *)secondBody.node;
+            [_gameDelegate totalScoreChanged:star.value];
+            [star removeStar];
+        }
     }
 }
 
