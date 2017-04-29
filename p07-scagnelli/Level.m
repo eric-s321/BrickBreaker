@@ -8,7 +8,6 @@
 
 #import "Level.h"
 #import "Block.h"
-#import "Star.h"
 
 @implementation Level
 
@@ -36,22 +35,31 @@
     for (int i = 0; i < 8; i++){
         if (i < 4){
             Block *block = [[Block alloc] initWithRect:CGRectMake(leftx, lefty, BLOCK_WIDTH, BLOCK_HEIGHT)
-                                                 color:[UIColor blueColor]];
+                                                 color:[UIColor redColor]];
             lefty += 100;
             [_blocks addObject:block];
         }
         else{
             Block *block = [[Block alloc] initWithRect:CGRectMake(rightx, righty, BLOCK_WIDTH, BLOCK_HEIGHT)
-                                                 color:[UIColor blueColor]];
+                                                 color:[UIColor redColor]];
             righty += 100;
             [_blocks addObject:block];
         }
     }
     
     Star *star = [[Star alloc] initWithImageNamed:@"star" intRect:CGRectMake(0, 350, 75, 75) withValue:500];
+    Star *star1 = [[Star alloc] initWithImageNamed:@"star" intRect:CGRectMake(100, -350, 75, 75) withValue:500];
     
     [_stars addObject:star];
+    [_stars addObject:star1];
+    
+    for(Star *s in _stars){
+        [s setStarDelegate:self];
+    }
 }
 
+-(void)removeStarFromArray:(Star *)star{
+    [_stars removeObject:star];
+}
 
 @end

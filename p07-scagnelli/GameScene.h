@@ -28,5 +28,6 @@
 -(void)didBeginContact:(SKPhysicsContact *)contact;
 -(void)boundVelocity;
 -(void)levelSetup:(int)startingScore;
+-(void)passedLevel;
 
 @end

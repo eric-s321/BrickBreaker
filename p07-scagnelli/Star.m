@@ -28,6 +28,7 @@
 
 -(void)removeStar{
     [self removeFromParent];
+    [_starDelegate removeStarFromArray:self];
 }
 
 

@@ -107,18 +107,18 @@
     
     if(firstBody.categoryBitMask == universe.BALL_CATEGORY){
         if(secondBody.categoryBitMask == universe.BOTTOM_CATEGORY){
-            NSLog(@"Ball hit the bottom");
+            //NSLog(@"Ball hit the bottom");
         }
         
         if(secondBody.categoryBitMask == universe.BLOCK_CATEGORY){
-            NSLog(@"Ball hit block!");
+            //NSLog(@"Ball hit block!");
             Block *block = (Block *)[secondBody node];
             [block breakBlock];
             [_gameDelegate levelScoreChanged:100];
         }
         
         if(secondBody.categoryBitMask == universe.PADDLE_CATEGORY){
-            NSLog(@"Ball hit paddle");
+            //NSLog(@"Ball hit paddle");
             if(!currentLevel.levelBegan) //First time ball hit paddle in this level
                 currentLevel.levelBegan = YES;
             
@@ -128,16 +128,12 @@
             float distanceFromCenter;
             float VELOCITY_CONSTANT = 2;
             if(contactPointX < paddlePosX){ //Ball hit left side of paddle
-                NSLog(@"LEFT");
                 distanceFromCenter = paddlePosX - contactPointX;
-                NSLog(@"%f", distanceFromCenter);
                 //Move ball to left
                 ball.physicsBody.velocity = CGVectorMake(distanceFromCenter * VELOCITY_CONSTANT * -1, ball.physicsBody.velocity.dy);
             }
             else{
-                NSLog(@"RIGHT");
                 distanceFromCenter = contactPointX - paddlePosX;
-                NSLog(@"%f", distanceFromCenter);
                 //Move ball to right
                 ball.physicsBody.velocity = CGVectorMake(distanceFromCenter * VELOCITY_CONSTANT, ball.physicsBody.velocity.dy);
             }
@@ -148,6 +144,12 @@
             Star *star = (Star *)secondBody.node;
             [_gameDelegate totalScoreChanged:star.value];
             [star removeStar];
+            
+            if([currentLevel.stars count] == 0){
+                NSLog(@"Last star was removed!");
+                self.scene.view.paused = YES;
+                [self passedLevel];
+            }
         }
     }
 }
@@ -164,6 +166,24 @@
         ball.physicsBody.velocity = CGVectorMake(ball.physicsBody.velocity.dx, 550);
     }
     NSLog(@"AFTER\nBall velocity dx = %f dy = %f", ball.physicsBody.velocity.dx, ball.physicsBody.velocity.dy);
+}
+
+- (void)passedLevel{
+    
+    //Blur the background
+    if (!UIAccessibilityIsReduceTransparencyEnabled()) {
+        self.view.backgroundColor = [UIColor clearColor];
+        
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        blurEffectView.frame = self.view.bounds;
+        blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        
+        [self.view addSubview:blurEffectView];
+    } else {
+        self.view.backgroundColor = [UIColor blackColor];
+    }
+
 }
 
 

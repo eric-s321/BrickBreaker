@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "Universe.h"
+#import "Star.h"
 
-@interface Level : NSObject{
+
+@interface Level : NSObject<StarDelegate>{
     Universe *universe;
 }
 
