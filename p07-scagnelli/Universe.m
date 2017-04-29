@@ -9,7 +9,8 @@
 #import "Universe.h"
 
 @implementation Universe
-@synthesize BALL_CATEGORY, BOTTOM_CATEGORY, BLOCK_CATEGORY, PADDLE_CATEGORY, BORDER_CATEGORY, STAR_CATEGORY;
+@synthesize BALL_CATEGORY, BOTTOM_CATEGORY, BLOCK_CATEGORY, PADDLE_CATEGORY,
+    BORDER_CATEGORY, STAR_CATEGORY, STAR_COLLISION, NON_STAR_COLLISION;
 
 static Universe *singleton = nil;
 
@@ -27,6 +28,7 @@ static Universe *singleton = nil;
         PADDLE_CATEGORY = 0x1 << 3;
         BORDER_CATEGORY = 0x1 << 4;
         STAR_CATEGORY = 0x1 << 5;
+        
         singleton = self;
     }
     

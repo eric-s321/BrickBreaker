@@ -65,17 +65,17 @@
     //Notify contact delegate when ball touches other objects
     ball.physicsBody.contactTestBitMask = universe.BOTTOM_CATEGORY | universe.BLOCK_CATEGORY |
                     universe.PADDLE_CATEGORY | universe.STAR_CATEGORY;
+    ball.physicsBody.collisionBitMask = universe.BORDER_CATEGORY | universe.PADDLE_CATEGORY |
+                    universe.BLOCK_CATEGORY ;
     
     currentLevel = [[Level alloc] init];
     [currentLevel createBlocks];
     
     //Add blocks to screen
     for (Block *block in currentLevel.blocks){
-        NSLog(@"BLOCKKK");
         [self addChild:block];
     }
     for (SKSpriteNode *star in currentLevel.stars){
-        NSLog(@"STARRRR");
         [self addChild:star];
     }
 }

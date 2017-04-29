@@ -16,6 +16,8 @@
 @property (nonatomic) UInt32 PADDLE_CATEGORY;
 @property (nonatomic) UInt32 BORDER_CATEGORY;
 @property (nonatomic) UInt32 STAR_CATEGORY;
+@property (nonatomic) UInt32 STAR_COLLISION;
+@property (nonatomic) UInt32 NON_STAR_COLLISION;
 
 +(Universe *)sharedInstance;
 
