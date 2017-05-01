@@ -28,8 +28,8 @@
 }
 
 -(void)removeStar{
+    NSLog(@"REMOVE STAR CALLED");
     [self removeFromParent]; //remove from gamescene
-    [_starDelegate removeStarFromArray:self]; //Remove from levels star array
 }
 
 

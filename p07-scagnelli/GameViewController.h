@@ -23,6 +23,7 @@
 
 -(IBAction)pauseGame:(id)sender;
 -(IBAction)resumeGame:(UIStoryboardSegue *)segue;
+-(IBAction)restartLevel:(UIStoryboardSegue *)segue;
 -(void)setGameSceneLevel:(Level *)level;
 
 @end

@@ -21,12 +21,16 @@
     Level *currentLevel;
     SKLabelNode *tapScreenLabel;
     Universe *universe;
+    CGPoint PADDLE_START_POSITION;
+    CGPoint BALL_START_POSITION;
 }
 
 @property (strong, nonatomic) id<GameDelegate> gameDelegate;
+@property (nonatomic) int currentRoundPoints;
 
 -(void)didMoveToView:(SKView *)view;
 -(void)didBeginContact:(SKPhysicsContact *)contact;
+-(void)clearBlocksAndStars;
 -(void)boundVelocity;
 -(void)levelSetup:(int)startingScore;
 -(void)passedLevel;

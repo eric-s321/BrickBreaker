@@ -11,13 +11,16 @@
 
 @class Universe;
 
-@interface Level : NSObject<StarDelegate>{
+@interface Level : NSObject{
     Universe *universe;
 }
 
 @property (strong, nonatomic) NSMutableArray *blocks;
 @property (strong, nonatomic) NSMutableArray *stars;
+@property (strong, nonatomic) NSMutableArray *starsCopy;
 @property (nonatomic) BOOL levelBegan;
+@property (nonatomic) int numStarsLeft;
+@property (nonatomic) int possibleScore;
 
 +(Level *)level1;
 +(Level *)level2;

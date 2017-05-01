@@ -10,14 +10,10 @@
 
 @class Universe;
 
-@protocol StarDelegate;
-
 
 @interface Star : SKSpriteNode{
     Universe *universe;
 }
-
-@property(strong, nonatomic) id<StarDelegate> starDelegate;
 
 @property(nonatomic) int value;
 
@@ -26,6 +22,3 @@
 
 @end
 
-@protocol StarDelegate
--(void)removeStarFromArray:(Star *)star;
-@end

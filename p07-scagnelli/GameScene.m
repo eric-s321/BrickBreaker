@@ -18,6 +18,7 @@
     SKShapeNode *ball;
     CGVector ballImpulse;
 }
+@synthesize currentRoundPoints;
 
 - (void)didMoveToView:(SKView *)view {
     // Setup your scene here
@@ -32,15 +33,16 @@
     
     paddle = (SKSpriteNode *)[self childNodeWithName:@"paddle"];
     float yCoord = (self.view.frame.size.height - paddle.frame.size.height*2.5) * -1;
-    
-    paddle.position = CGPointMake(0, yCoord);
+    PADDLE_START_POSITION = CGPointMake(0, yCoord);
+    paddle.position = PADDLE_START_POSITION;
     paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:paddle.frame.size];
     paddle.physicsBody.dynamic = NO;
     
     ball = [SKShapeNode shapeNodeWithCircleOfRadius:20];
     ball.strokeColor = [UIColor greenColor];
     ball.fillColor = [UIColor greenColor];
-    ball.position = CGPointMake(0, self.frame.size.height/8);
+    BALL_START_POSITION = CGPointMake(0, self.frame.size.height/8);
+    ball.position = BALL_START_POSITION;
     
     ball.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:20];
     ball.physicsBody.friction = 0;
@@ -70,6 +72,8 @@
                     universe.PADDLE_CATEGORY | universe.STAR_CATEGORY;
     ball.physicsBody.collisionBitMask = universe.BORDER_CATEGORY | universe.PADDLE_CATEGORY |
                     universe.BLOCK_CATEGORY ;
+    
+    currentRoundPoints = 0;
 }
 
 -(void)levelSetup:(int)startingScore{
@@ -88,6 +92,25 @@
     tapScreenLabel.text = [NSString stringWithFormat:@"Tap Screen to Start"];
     
     [self addChild:tapScreenLabel];
+    currentRoundPoints = 0;
+}
+
+-(void)clearBlocksAndStars{
+    
+    for (Block *block in currentLevel.blocks){
+        [block removeFromParent];
+    }
+    for (SKSpriteNode *star in currentLevel.stars){
+        [star removeFromParent];
+    }
+    
+    paddle.position = PADDLE_START_POSITION;
+    ball.position = BALL_START_POSITION;
+    ball.physicsBody.dynamic = NO;  //Start ball stationary
+    ball.physicsBody.velocity = CGVectorMake(0, 0);
+    self.paused = NO;
+    
+    currentLevel.numStarsLeft = (int)[currentLevel.stars count];
 }
 
 //Called when contact with an object and anything in it's contactTestBitMask is detected
@@ -143,11 +166,13 @@
             NSLog(@"Ball hit star");
             Star *star = (Star *)secondBody.node;
             [_gameDelegate totalScoreChanged:star.value];
+            currentRoundPoints += star.value;
             [star removeStar];
+            currentLevel.numStarsLeft--;
             
-            if([currentLevel.stars count] == 0){
+            if(currentLevel.numStarsLeft == 0){
                 NSLog(@"Last star was removed!");
-                self.scene.view.paused = YES;
+                self.paused = YES;
                 [self passedLevel];
             }
         }
@@ -192,7 +217,6 @@
 
 -(void)setCurrentLevel:(Level *)level{
     currentLevel = level;
-    NSLog(@"In game scene set current level %@", self);
 }
 
 - (void)touchDownAtPoint:(CGPoint)pos {

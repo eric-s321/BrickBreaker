@@ -8,6 +8,7 @@
 
 #import "GameViewController.h"
 #import "Universe.h"
+#import "Level.h"
 
 @implementation GameViewController
 @synthesize levelScoreLabel, totalScoreLabel;
@@ -69,7 +70,6 @@
 
 -(void)setGameSceneLevel:(Level *)level{
     [scene setCurrentLevel:level];
-    NSLog(@"Set game scene level called %@", self);
 }
 
 -(IBAction)pauseGame:(id)sender{
@@ -83,6 +83,17 @@
 
 -(IBAction)resumeGame:(UIStoryboardSegue *)segue{
     scene.paused = NO;
+}
+
+-(IBAction)restartLevel:(UIStoryboardSegue *)segue{
+    
+    [scene clearBlocksAndStars];
+    Level *level = [[Universe sharedInstance] getCurrentLevel];
+    level.levelBegan = NO;
+    [self totalScoreChanged:scene.currentRoundPoints * -1];  //Get rid of the points we already awarded this level
+    [scene setCurrentLevel:level];
+    NSLog(@"Setting up level with %d", level.possibleScore);
+    [scene levelSetup:level.possibleScore];
 }
 
 -(void)levelScoreChanged:(int)difference{
