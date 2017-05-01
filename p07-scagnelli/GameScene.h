@@ -15,6 +15,7 @@
 -(void) levelScoreChanged:(int)difference;
 -(void) totalScoreChanged:(int)difference;
 -(void) setUpLevel:(int)startingScore;
+-(void) showLostLevelScreen;
 @end
 
 @interface GameScene : SKScene <SKPhysicsContactDelegate>{

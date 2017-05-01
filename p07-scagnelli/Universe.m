@@ -75,15 +75,6 @@ static Universe *singleton = nil;
 }
 
 -(Level *)getCurrentLevel{
-/*
-    NSLog(@"GET CURRENT LEVEL");
-    Level *originalLevel = levels[levelIndex];
-    Level *copyLevel = [levels[levelIndex] copy];
-    NSLog(@"Original level %@", levels[levelIndex]);
-    NSLog(@"Copy level %@", copyLevel);
-    NSLog(@"Copy level stars %@", copyLevel.stars);
-    NSLog(@"Original level stars %@", originalLevel.stars);
-*/
     return levels[levelIndex];
 }
 

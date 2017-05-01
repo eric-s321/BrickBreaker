@@ -20,7 +20,14 @@
         self.effect = blurEffect;
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(200, 200, 150, 100)];
+        float xCenter = self.frame.size.width / 2;
+        float yCenter = self.frame.size.height / 2;
+        
+        float labelHeight = 100;
+        float labelWidth = 150;
+        
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(xCenter - labelWidth/2, 200, labelWidth, labelHeight)];
         label.text = @"Testing Testing 1 2 3...";
         label.textColor = [UIColor whiteColor];
         [self addSubview:label];

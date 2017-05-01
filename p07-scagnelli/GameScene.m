@@ -132,6 +132,8 @@
     if(firstBody.categoryBitMask == universe.BALL_CATEGORY){
         if(secondBody.categoryBitMask == universe.BOTTOM_CATEGORY){
             //NSLog(@"Ball hit the bottom");
+            self.paused = YES;
+            [_gameDelegate showLostLevelScreen];
         }
         
         if(secondBody.categoryBitMask == universe.BLOCK_CATEGORY){
@@ -239,7 +241,7 @@
 }
 
 - (void)touchUpAtPoint:(CGPoint)pos{
-    if(!currentLevel.levelBegan){
+    if(!currentLevel.levelBegan && !ball.physicsBody.dynamic){
         ball.physicsBody.dynamic = YES; //Allow ball to move
         ballImpulse = CGVectorMake(0, -30);  //Set impulse for the ball
         [ball.physicsBody applyImpulse:ballImpulse];

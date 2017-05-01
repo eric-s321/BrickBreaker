@@ -111,6 +111,14 @@
     levelScoreInt = startingScore;
 }
 
+-(void)showLostLevelScreen{
+
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UIViewController *lostLevelController = [storyBoard
+                       instantiateViewControllerWithIdentifier:@"LostLevelViewController"];
+    [self presentViewController:lostLevelController animated:YES completion:nil];
+}
+
 -(void)nextLevel{
     [scene levelSetup:[[Universe sharedInstance] getCurrentLevel].possibleScore];
 }
