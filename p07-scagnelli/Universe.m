@@ -10,7 +10,7 @@
 #import "GameViewController.h"
 #import "Level.h"
 
-#define NUM_LEVELS 1
+#define NUM_LEVELS 2
 
 @implementation Universe
 @synthesize BALL_CATEGORY, BOTTOM_CATEGORY, BLOCK_CATEGORY, PADDLE_CATEGORY,
@@ -55,6 +55,7 @@ static Universe *singleton = nil;
 
 -(void)loadLevels{
     [levels addObject:[Level level1]];
+    [levels addObject:[Level level2]];
 }
 
 -(void)setLevel{
@@ -62,7 +63,15 @@ static Universe *singleton = nil;
 }
 
 -(void)nextLevel{
-    levelIndex++;
+    if(levelIndex + 1 < NUM_LEVELS)
+        levelIndex++;
+}
+
+-(void)startLevel{
+    [gameViewController nextLevel];
+}
+-(void)clearLevel{
+    [gameViewController clearLevel];
 }
 
 -(Level *)getCurrentLevel{

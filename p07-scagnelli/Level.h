@@ -25,6 +25,6 @@
 +(Level *)level1;
 +(Level *)level2;
 
--(void)createBlocks;
+-(void)createLevel1;
 
 @end

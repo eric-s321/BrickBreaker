@@ -111,4 +111,12 @@
     levelScoreInt = startingScore;
 }
 
+-(void)nextLevel{
+    [scene levelSetup:[[Universe sharedInstance] getCurrentLevel].possibleScore];
+}
+
+-(void)clearLevel{
+    [scene clearBlocksAndStars];
+}
+
 @end

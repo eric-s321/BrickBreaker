@@ -32,6 +32,8 @@
 -(void)loadLevels;
 -(void)setLevel;
 -(void)nextLevel;
+-(void)startLevel;
+-(void)clearLevel;
 -(Level *)getCurrentLevel;
 
 @end

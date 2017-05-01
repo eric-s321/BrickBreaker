@@ -25,5 +25,7 @@
 -(IBAction)resumeGame:(UIStoryboardSegue *)segue;
 -(IBAction)restartLevel:(UIStoryboardSegue *)segue;
 -(void)setGameSceneLevel:(Level *)level;
+-(void)nextLevel;
+-(void)clearLevel;
 
 @end

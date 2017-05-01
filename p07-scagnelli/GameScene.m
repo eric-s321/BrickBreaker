@@ -90,6 +90,7 @@
     tapScreenLabel = [[SKLabelNode alloc] initWithFontNamed:@"Avenir"];
     tapScreenLabel.fontSize = 30;
     tapScreenLabel.text = [NSString stringWithFormat:@"Tap Screen to Start"];
+    [_gameDelegate setUpLevel:currentLevel.possibleScore];
     
     [self addChild:tapScreenLabel];
     currentRoundPoints = 0;

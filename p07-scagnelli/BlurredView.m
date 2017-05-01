@@ -7,6 +7,7 @@
 //
 
 #import "BlurredView.h"
+#import "Universe.h"
 
 @implementation BlurredView
 
@@ -25,7 +26,7 @@
         [self addSubview:label];
         
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(50, 400, 150, 100)];
-        [btn setTitle:@"Go back" forState:UIControlStateNormal];
+        [btn setTitle:@"Continue" forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(presentGameScene) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btn];
     }
@@ -34,6 +35,11 @@
 }
 
 -(void)presentGameScene{
+    [[Universe sharedInstance] clearLevel];
+    [[Universe sharedInstance] nextLevel];
+    [[Universe sharedInstance] setLevel];
+    [[Universe sharedInstance] startLevel];
+    
     [self removeFromSuperview];
 }
 
