@@ -119,6 +119,14 @@
     [self presentViewController:lostLevelController animated:YES completion:nil];
 }
 
+-(int)getLevelScore{
+    return levelScoreInt;
+}
+
+-(int)getTotalScore{
+    return totalScoreInt;
+}
+
 -(void)nextLevel{
     [scene levelSetup:[[Universe sharedInstance] getCurrentLevel].possibleScore];
 }

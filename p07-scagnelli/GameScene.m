@@ -199,11 +199,15 @@
 - (void)passedLevel{
     NSLog(@"Beginning of passed level");
     
+    int levelScore = [_gameDelegate getLevelScore];
+    int totalScore = [_gameDelegate getTotalScore];
+    
     //Blur the background
     if(!UIAccessibilityIsReduceTransparencyEnabled()) {
         NSLog(@"IN IF");
         self.view.backgroundColor = [UIColor clearColor];
-        BlurredView *blurredView = [[BlurredView alloc] initWithFrame:self.view.frame];
+        BlurredView *blurredView = [[BlurredView alloc]
+                initWithFrame:self.view.frame levelScore:levelScore totalScore:totalScore];
         [self.view addSubview:blurredView];
     }
     else{

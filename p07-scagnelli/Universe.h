@@ -35,5 +35,6 @@
 -(void)startLevel;
 -(void)clearLevel;
 -(Level *)getCurrentLevel;
+-(void)incrementTotalScore:(int)score;
 
 @end

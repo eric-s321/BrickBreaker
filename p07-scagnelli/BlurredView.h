@@ -8,9 +8,27 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BlurredView : UIVisualEffectView
+@interface BlurredView : UIVisualEffectView{
+    UILabel *levelCompleteLabel;
+    UILabel *levelPointsLabel;
+    UILabel *totalPointsLabel;
+    UILabel *levelScoreLabel;
+    UILabel *totalScoreLabel;
+    int levelScoreInt;
+    int finalLevelScore;
+    int totalScoreInt;
+    int finalTotalScoreInt;
+    int totalScoreDifference;
+    
+    NSTimeInterval timeInterval;
+    
+    NSTimer *timer;
+}
 
--(id)initWithFrame:(CGRect)frame;
+//-(id)initWithFrame:(CGRect)frame;
+-(id)initWithFrame:(CGRect)frame levelScore:(int)levelScore totalScore:(int)totalScore;
+-(void)incrementLevelScore;
+-(void)incrementTotalScore;
 -(void)presentGameScene;
     
 @end

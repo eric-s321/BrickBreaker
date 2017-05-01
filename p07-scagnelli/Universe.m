@@ -78,4 +78,8 @@ static Universe *singleton = nil;
     return levels[levelIndex];
 }
 
+-(void)incrementTotalScore:(int)score{
+    [gameViewController totalScoreChanged:score];
+}
+
 @end
