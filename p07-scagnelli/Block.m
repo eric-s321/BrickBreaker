@@ -7,6 +7,7 @@
 //
 
 #import "Block.h"
+#import "Universe.h"
 
 @implementation Block
 

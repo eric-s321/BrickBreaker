@@ -8,9 +8,20 @@
 
 #import "Level.h"
 #import "Block.h"
+#import "Universe.h"
 
 @implementation Level
 
++(Level *)level1{
+    Level *level1 = [[Level alloc] init];
+    [level1 createBlocks];
+    return level1;
+}
+
++(Level *)level2{
+    return NULL;
+
+}
 
 -(id)init{
     self = [super init];

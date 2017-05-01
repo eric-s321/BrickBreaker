@@ -7,12 +7,15 @@
 //
 
 #import "GameViewController.h"
+#import "Universe.h"
 
 @implementation GameViewController
 @synthesize levelScoreLabel, totalScoreLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"Game view did load %@", self);
     
     totalScoreInt = 0;
     levelScoreInt = 0;
@@ -29,7 +32,12 @@
     [skView presentScene:scene];
     
     [scene setGameDelegate:self];
+    
+    [[Universe sharedInstance] setGameViewController:self];
+    
+    [scene setCurrentLevel:[[Universe sharedInstance] getCurrentLevel]];
     [scene levelSetup:1000];
+    
     
 /*
     skView.showsFPS = YES;
@@ -57,6 +65,11 @@
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
+}
+
+-(void)setGameSceneLevel:(Level *)level{
+    [scene setCurrentLevel:level];
+    NSLog(@"Set game scene level called %@", self);
 }
 
 -(IBAction)pauseGame:(id)sender{

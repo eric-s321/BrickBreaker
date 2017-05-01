@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Universe.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    [[Universe sharedInstance] loadLevels];
+    
+    UIViewController *gameViewController = [self.window rootViewController];
+    [[Universe sharedInstance] setGameViewController:(GameViewController *)gameViewController];
+    [[Universe sharedInstance] setLevel];
+    
     return YES;
 }
 

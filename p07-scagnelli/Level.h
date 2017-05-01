@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Universe.h"
 #import "Star.h"
 
+@class Universe;
 
 @interface Level : NSObject<StarDelegate>{
     Universe *universe;
@@ -18,6 +18,9 @@
 @property (strong, nonatomic) NSMutableArray *blocks;
 @property (strong, nonatomic) NSMutableArray *stars;
 @property (nonatomic) BOOL levelBegan;
+
++(Level *)level1;
++(Level *)level2;
 
 -(void)createBlocks;
 

@@ -7,6 +7,7 @@
 //
 
 #import "Star.h"
+#import "Universe.h"
 
 @implementation Star
 
@@ -27,8 +28,8 @@
 }
 
 -(void)removeStar{
-    [self removeFromParent];
-    [_starDelegate removeStarFromArray:self];
+    [self removeFromParent]; //remove from gamescene
+    [_starDelegate removeStarFromArray:self]; //Remove from levels star array
 }
 
 

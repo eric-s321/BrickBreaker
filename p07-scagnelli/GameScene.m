@@ -9,6 +9,9 @@
 #import "GameScene.h"
 #import "Block.h"
 #import "Star.h"
+#import "BlurredView.h"
+#import "Level.h"
+#import "Universe.h"
 
 @implementation GameScene {
     SKSpriteNode *paddle;
@@ -67,21 +70,18 @@
                     universe.PADDLE_CATEGORY | universe.STAR_CATEGORY;
     ball.physicsBody.collisionBitMask = universe.BORDER_CATEGORY | universe.PADDLE_CATEGORY |
                     universe.BLOCK_CATEGORY ;
+}
+
+-(void)levelSetup:(int)startingScore{
+    [_gameDelegate setUpLevel:startingScore];
     
-    currentLevel = [[Level alloc] init];
-    [currentLevel createBlocks];
-    
-    //Add blocks to screen
+    //Add blocks and stars
     for (Block *block in currentLevel.blocks){
         [self addChild:block];
     }
     for (SKSpriteNode *star in currentLevel.stars){
         [self addChild:star];
     }
-}
-
--(void)levelSetup:(int)startingScore{
-    [_gameDelegate setUpLevel:startingScore];
     
     tapScreenLabel = [[SKLabelNode alloc] initWithFontNamed:@"Avenir"];
     tapScreenLabel.fontSize = 30;
@@ -169,23 +169,31 @@
 }
 
 - (void)passedLevel{
+    NSLog(@"Beginning of passed level");
     
     //Blur the background
-    if (!UIAccessibilityIsReduceTransparencyEnabled()) {
+    if(!UIAccessibilityIsReduceTransparencyEnabled()) {
+        NSLog(@"IN IF");
         self.view.backgroundColor = [UIColor clearColor];
-        
-        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-        UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-        blurEffectView.frame = self.view.bounds;
-        blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        
-        [self.view addSubview:blurEffectView];
-    } else {
-        self.view.backgroundColor = [UIColor blackColor];
+        BlurredView *blurredView = [[BlurredView alloc] initWithFrame:self.view.frame];
+        [self.view addSubview:blurredView];
     }
+    else{
+        NSLog(@"IN ELSE");
+        self.view.backgroundColor = [UIColor blackColor];
+        UIView *regView = [[UIView alloc] initWithFrame:self.view.frame];
+        [self.view addSubview:regView];
+    }
+}
+
+-(void)nextLevel{
 
 }
 
+-(void)setCurrentLevel:(Level *)level{
+    currentLevel = level;
+    NSLog(@"In game scene set current level %@", self);
+}
 
 - (void)touchDownAtPoint:(CGPoint)pos {
     

@@ -7,6 +7,10 @@
 //
 
 #import "Universe.h"
+#import "GameViewController.h"
+#import "Level.h"
+
+#define NUM_LEVELS 1
 
 @implementation Universe
 @synthesize BALL_CATEGORY, BOTTOM_CATEGORY, BLOCK_CATEGORY, PADDLE_CATEGORY,
@@ -28,6 +32,8 @@ static Universe *singleton = nil;
         PADDLE_CATEGORY = 0x1 << 3;
         BORDER_CATEGORY = 0x1 << 4;
         STAR_CATEGORY = 0x1 << 5;
+        levelIndex = 0;
+        levels = [[NSMutableArray alloc] init];
         
         singleton = self;
     }
@@ -41,6 +47,26 @@ static Universe *singleton = nil;
         return singleton;
     
     return [[Universe alloc]init];
+}
+
+-(void)setGameViewController:(GameViewController *)gameViewControllerIn{
+    gameViewController = gameViewControllerIn;
+}
+
+-(void)loadLevels{
+    [levels addObject:[Level level1]];
+}
+
+-(void)setLevel{
+    [gameViewController setGameSceneLevel:levels[levelIndex]];
+}
+
+-(void)nextLevel{
+    levelIndex++;
+}
+
+-(Level *)getCurrentLevel{
+    return levels[levelIndex];
 }
 
 @end

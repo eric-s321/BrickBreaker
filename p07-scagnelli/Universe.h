@@ -8,7 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Universe : NSObject
+@class GameViewController;
+@class Level;
+
+@interface Universe : NSObject{
+    GameViewController *gameViewController;
+    NSMutableArray *levels;
+    int levelIndex;
+}
 
 @property (nonatomic) UInt32 BALL_CATEGORY;
 @property (nonatomic) UInt32 BOTTOM_CATEGORY;
@@ -20,5 +27,11 @@
 @property (nonatomic) UInt32 NON_STAR_COLLISION;
 
 +(Universe *)sharedInstance;
+
+-(void)setGameViewController:(GameViewController *)gameViewControllerIn;
+-(void)loadLevels;
+-(void)setLevel;
+-(void)nextLevel;
+-(Level *)getCurrentLevel;
 
 @end

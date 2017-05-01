@@ -7,7 +7,8 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "Universe.h"
+
+@class Universe;
 
 @protocol StarDelegate;
 

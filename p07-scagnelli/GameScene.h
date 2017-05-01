@@ -7,8 +7,9 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "Level.h"
-#import "Universe.h"
+
+@class Level;
+@class Universe;
 
 @protocol GameDelegate
 -(void) levelScoreChanged:(int)difference;
@@ -29,5 +30,7 @@
 -(void)boundVelocity;
 -(void)levelSetup:(int)startingScore;
 -(void)passedLevel;
+-(void)nextLevel;
+-(void)setCurrentLevel:(Level *)level;
 
 @end
