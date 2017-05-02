@@ -82,4 +82,21 @@ static Universe *singleton = nil;
     [gameViewController totalScoreChanged:score];
 }
 
+-(void)setLevelIndex:(int)newIndex{
+    levelIndex = newIndex;
+}
+
+/*
+-(IBAction)newGame:(UIStoryboardSegue *)segue{
+    levelIndex = 0;
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    GameViewController *newGameController = [storyBoard instantiateViewControllerWithIdentifier:@"GameViewController"];
+    [self setGameViewController:newGameController];
+    [self setLevel];
+    
+    UIViewController *initialController = [storyBoard instantiateInitialViewController];
+    [initialController presentViewController:newGameController animated:YES completion:nil];
+}
+*/
+
 @end

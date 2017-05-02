@@ -77,13 +77,16 @@
 }
 
 -(void)levelSetup:(int)startingScore{
+    NSLog(@"IN game scene level setup");
     [_gameDelegate setUpLevel:startingScore];
     
     //Add blocks and stars
     for (Block *block in currentLevel.blocks){
+        NSLog(@"Adding block");
         [self addChild:block];
     }
     for (SKSpriteNode *star in currentLevel.stars){
+        NSLog(@"Adding star");
         [self addChild:star];
     }
     

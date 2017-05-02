@@ -36,5 +36,6 @@
 -(void)clearLevel;
 -(Level *)getCurrentLevel;
 -(void)incrementTotalScore:(int)score;
+-(void)setLevelIndex:(int)newIndex;
 
 @end

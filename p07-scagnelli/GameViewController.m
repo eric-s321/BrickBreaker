@@ -135,4 +135,19 @@
     [scene clearBlocksAndStars];
 }
 
+-(IBAction)newGame:(UIStoryboardSegue *)segue{
+    totalScoreInt = 0;
+    [scene clearBlocksAndStars];
+    [[Universe sharedInstance] setLevelIndex:0];
+    [[Universe sharedInstance] setLevel];
+    [[Universe sharedInstance] getCurrentLevel].levelBegan = NO;
+    [self resetTotalScore];
+    [[Universe sharedInstance] startLevel];
+}
+
+-(void)resetTotalScore{
+    totalScoreInt = 0;
+    totalScoreLabel.text = [NSString stringWithFormat:@"%d", totalScoreInt];
+}
+
 @end
