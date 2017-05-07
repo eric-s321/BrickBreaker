@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:p07-scagnelli.xcodeproj">
+      location = "self:/Users/ericscagnelli/Documents/CS_441/p07-scagnelli/Brick_Breaker.xcodeproj">
    </FileRef>
 </Workspace>

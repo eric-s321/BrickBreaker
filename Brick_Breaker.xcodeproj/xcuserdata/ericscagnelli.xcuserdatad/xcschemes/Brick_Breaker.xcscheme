@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B67C23981EA862F000742831"
-               BuildableName = "p07-scagnelli.app"
-               BlueprintName = "p07-scagnelli"
-               ReferencedContainer = "container:p07-scagnelli.xcodeproj">
+               BuildableName = "Brick_Breaker.app"
+               BlueprintName = "Brick_Breaker"
+               ReferencedContainer = "container:Brick_Breaker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B67C23B81EA862F100742831"
-               BuildableName = "p07-scagnelliTests.xctest"
-               BlueprintName = "p07-scagnelliTests"
-               ReferencedContainer = "container:p07-scagnelli.xcodeproj">
+               BuildableName = "Brick_BreakerTests.xctest"
+               BlueprintName = "Brick_BreakerTests"
+               ReferencedContainer = "container:Brick_Breaker.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B67C23C31EA862F100742831"
-               BuildableName = "p07-scagnelliUITests.xctest"
-               BlueprintName = "p07-scagnelliUITests"
-               ReferencedContainer = "container:p07-scagnelli.xcodeproj">
+               BuildableName = "Brick_BreakerUITests.xctest"
+               BlueprintName = "Brick_BreakerUITests"
+               ReferencedContainer = "container:Brick_Breaker.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B67C23981EA862F000742831"
-            BuildableName = "p07-scagnelli.app"
-            BlueprintName = "p07-scagnelli"
-            ReferencedContainer = "container:p07-scagnelli.xcodeproj">
+            BuildableName = "Brick_Breaker.app"
+            BlueprintName = "Brick_Breaker"
+            ReferencedContainer = "container:Brick_Breaker.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B67C23981EA862F000742831"
-            BuildableName = "p07-scagnelli.app"
-            BlueprintName = "p07-scagnelli"
-            ReferencedContainer = "container:p07-scagnelli.xcodeproj">
+            BuildableName = "Brick_Breaker.app"
+            BlueprintName = "Brick_Breaker"
+            ReferencedContainer = "container:Brick_Breaker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B67C23981EA862F000742831"
-            BuildableName = "p07-scagnelli.app"
-            BlueprintName = "p07-scagnelli"
-            ReferencedContainer = "container:p07-scagnelli.xcodeproj">
+            BuildableName = "Brick_Breaker.app"
+            BlueprintName = "Brick_Breaker"
+            ReferencedContainer = "container:Brick_Breaker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

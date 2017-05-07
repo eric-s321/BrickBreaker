@@ -46,7 +46,7 @@
 /* Begin PBXFileReference section */
 		B61F79AF1EB45920009437D2 /* BlurredView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurredView.h; sourceTree = "<group>"; };
 		B61F79B01EB45920009437D2 /* BlurredView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurredView.m; sourceTree = "<group>"; };
-		B67C23991EA862F100742831 /* p07-scagnelli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "p07-scagnelli.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B67C23991EA862F100742831 /* Brick_Breaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Brick_Breaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B67C239D1EA862F100742831 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B67C239F1EA862F100742831 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B67C23A01EA862F100742831 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -59,10 +59,10 @@
 		B67C23AD1EA862F100742831 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B67C23B21EA862F100742831 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B67C23B41EA862F100742831 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B67C23B91EA862F100742831 /* p07-scagnelliTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "p07-scagnelliTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B67C23B91EA862F100742831 /* Brick_BreakerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Brick_BreakerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B67C23BD1EA862F100742831 /* p07_scagnelliTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = p07_scagnelliTests.m; sourceTree = "<group>"; };
 		B67C23BF1EA862F100742831 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B67C23C41EA862F100742831 /* p07-scagnelliUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "p07-scagnelliUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B67C23C41EA862F100742831 /* Brick_BreakerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Brick_BreakerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B67C23C81EA862F100742831 /* p07_scagnelliUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = p07_scagnelliUITests.m; sourceTree = "<group>"; };
 		B67C23CA1EA862F100742831 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B67CDB751EADC42700B7B433 /* BrokenBlock.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BrokenBlock.sks; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 		B67C23901EA862F000742831 = {
 			isa = PBXGroup;
 			children = (
-				B67C239B1EA862F100742831 /* p07-scagnelli */,
+				B67C239B1EA862F100742831 /* Brick_Breaker */,
 				B67C23BC1EA862F100742831 /* p07-scagnelliTests */,
 				B67C23C71EA862F100742831 /* p07-scagnelliUITests */,
 				B67C239A1EA862F100742831 /* Products */,
@@ -115,14 +115,14 @@
 		B67C239A1EA862F100742831 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B67C23991EA862F100742831 /* p07-scagnelli.app */,
-				B67C23B91EA862F100742831 /* p07-scagnelliTests.xctest */,
-				B67C23C41EA862F100742831 /* p07-scagnelliUITests.xctest */,
+				B67C23991EA862F100742831 /* Brick_Breaker.app */,
+				B67C23B91EA862F100742831 /* Brick_BreakerTests.xctest */,
+				B67C23C41EA862F100742831 /* Brick_BreakerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B67C239B1EA862F100742831 /* p07-scagnelli */ = {
+		B67C239B1EA862F100742831 /* Brick_Breaker */ = {
 			isa = PBXGroup;
 			children = (
 				B67C239F1EA862F100742831 /* AppDelegate.h */,
@@ -150,7 +150,7 @@
 				B67C239C1EA862F100742831 /* Supporting Files */,
 				B67CDB761EADC42700B7B433 /* Assets.xcassets */,
 			);
-			path = "p07-scagnelli";
+			path = Brick_Breaker;
 			sourceTree = "<group>";
 		};
 		B67C239C1EA862F100742831 /* Supporting Files */ = {
@@ -182,9 +182,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B67C23981EA862F000742831 /* p07-scagnelli */ = {
+		B67C23981EA862F000742831 /* Brick_Breaker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B67C23CD1EA862F100742831 /* Build configuration list for PBXNativeTarget "p07-scagnelli" */;
+			buildConfigurationList = B67C23CD1EA862F100742831 /* Build configuration list for PBXNativeTarget "Brick_Breaker" */;
 			buildPhases = (
 				B67C23951EA862F000742831 /* Sources */,
 				B67C23961EA862F000742831 /* Frameworks */,
@@ -194,14 +194,14 @@
 			);
 			dependencies = (
 			);
-			name = "p07-scagnelli";
+			name = Brick_Breaker;
 			productName = "p07-scagnelli";
-			productReference = B67C23991EA862F100742831 /* p07-scagnelli.app */;
+			productReference = B67C23991EA862F100742831 /* Brick_Breaker.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B67C23B81EA862F100742831 /* p07-scagnelliTests */ = {
+		B67C23B81EA862F100742831 /* Brick_BreakerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B67C23D01EA862F100742831 /* Build configuration list for PBXNativeTarget "p07-scagnelliTests" */;
+			buildConfigurationList = B67C23D01EA862F100742831 /* Build configuration list for PBXNativeTarget "Brick_BreakerTests" */;
 			buildPhases = (
 				B67C23B51EA862F100742831 /* Sources */,
 				B67C23B61EA862F100742831 /* Frameworks */,
@@ -212,14 +212,14 @@
 			dependencies = (
 				B67C23BB1EA862F100742831 /* PBXTargetDependency */,
 			);
-			name = "p07-scagnelliTests";
+			name = Brick_BreakerTests;
 			productName = "p07-scagnelliTests";
-			productReference = B67C23B91EA862F100742831 /* p07-scagnelliTests.xctest */;
+			productReference = B67C23B91EA862F100742831 /* Brick_BreakerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		B67C23C31EA862F100742831 /* p07-scagnelliUITests */ = {
+		B67C23C31EA862F100742831 /* Brick_BreakerUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B67C23D31EA862F100742831 /* Build configuration list for PBXNativeTarget "p07-scagnelliUITests" */;
+			buildConfigurationList = B67C23D31EA862F100742831 /* Build configuration list for PBXNativeTarget "Brick_BreakerUITests" */;
 			buildPhases = (
 				B67C23C01EA862F100742831 /* Sources */,
 				B67C23C11EA862F100742831 /* Frameworks */,
@@ -230,9 +230,9 @@
 			dependencies = (
 				B67C23C61EA862F100742831 /* PBXTargetDependency */,
 			);
-			name = "p07-scagnelliUITests";
+			name = Brick_BreakerUITests;
 			productName = "p07-scagnelliUITests";
-			productReference = B67C23C41EA862F100742831 /* p07-scagnelliUITests.xctest */;
+			productReference = B67C23C41EA862F100742831 /* Brick_BreakerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -263,7 +263,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B67C23941EA862F000742831 /* Build configuration list for PBXProject "p07-scagnelli" */;
+			buildConfigurationList = B67C23941EA862F000742831 /* Build configuration list for PBXProject "Brick_Breaker" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -276,9 +276,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B67C23981EA862F000742831 /* p07-scagnelli */,
-				B67C23B81EA862F100742831 /* p07-scagnelliTests */,
-				B67C23C31EA862F100742831 /* p07-scagnelliUITests */,
+				B67C23981EA862F000742831 /* Brick_Breaker */,
+				B67C23B81EA862F100742831 /* Brick_BreakerTests */,
+				B67C23C31EA862F100742831 /* Brick_BreakerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -351,12 +351,12 @@
 /* Begin PBXTargetDependency section */
 		B67C23BB1EA862F100742831 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B67C23981EA862F000742831 /* p07-scagnelli */;
+			target = B67C23981EA862F000742831 /* Brick_Breaker */;
 			targetProxy = B67C23BA1EA862F100742831 /* PBXContainerItemProxy */;
 		};
 		B67C23C61EA862F100742831 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B67C23981EA862F000742831 /* p07-scagnelli */;
+			target = B67C23981EA862F000742831 /* Brick_Breaker */;
 			targetProxy = B67C23C51EA862F100742831 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -478,9 +478,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZF6U863PUS;
-				INFOPLIST_FILE = "p07-scagnelli/Info.plist";
+				INFOPLIST_FILE = Brick_Breaker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "escagne1.p07-scagnelli";
+				PRODUCT_BUNDLE_IDENTIFIER = "escagne1.Brick-Breaker1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -490,9 +490,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZF6U863PUS;
-				INFOPLIST_FILE = "p07-scagnelli/Info.plist";
+				INFOPLIST_FILE = Brick_Breaker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "escagne1.p07-scagnelli";
+				PRODUCT_BUNDLE_IDENTIFIER = "escagne1.Brick-Breaker1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -506,7 +506,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "escagne1.p07-scagnelliTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/p07-scagnelli.app/p07-scagnelli";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Brick_Breaker.app/Brick_Breaker";
 			};
 			name = Debug;
 		};
@@ -519,7 +519,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "escagne1.p07-scagnelliTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/p07-scagnelli.app/p07-scagnelli";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Brick_Breaker.app/Brick_Breaker";
 			};
 			name = Release;
 		};
@@ -550,7 +550,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B67C23941EA862F000742831 /* Build configuration list for PBXProject "p07-scagnelli" */ = {
+		B67C23941EA862F000742831 /* Build configuration list for PBXProject "Brick_Breaker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B67C23CB1EA862F100742831 /* Debug */,
@@ -559,7 +559,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B67C23CD1EA862F100742831 /* Build configuration list for PBXNativeTarget "p07-scagnelli" */ = {
+		B67C23CD1EA862F100742831 /* Build configuration list for PBXNativeTarget "Brick_Breaker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B67C23CE1EA862F100742831 /* Debug */,
@@ -568,7 +568,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B67C23D01EA862F100742831 /* Build configuration list for PBXNativeTarget "p07-scagnelliTests" */ = {
+		B67C23D01EA862F100742831 /* Build configuration list for PBXNativeTarget "Brick_BreakerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B67C23D11EA862F100742831 /* Debug */,
@@ -577,7 +577,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B67C23D31EA862F100742831 /* Build configuration list for PBXNativeTarget "p07-scagnelliUITests" */ = {
+		B67C23D31EA862F100742831 /* Build configuration list for PBXNativeTarget "Brick_BreakerUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B67C23D41EA862F100742831 /* Debug */,
