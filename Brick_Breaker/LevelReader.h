@@ -10,6 +10,10 @@
 
 @interface LevelReader : NSObject<NSXMLParserDelegate>
 
+@property(strong, nonatomic) NSMutableArray *levels;
+@property(nonatomic) int numLevels;
+
+
 -(void)startParsing;
-    
+
 @end

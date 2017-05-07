@@ -13,10 +13,11 @@
 
 @interface Universe : NSObject{
     GameViewController *gameViewController;
-    NSMutableArray *levels;
     int levelIndex;
 }
 
+@property (strong, nonatomic) NSArray *levels;
+@property (nonatomic) int NUM_LEVELS;
 @property (nonatomic) UInt32 BALL_CATEGORY;
 @property (nonatomic) UInt32 BOTTOM_CATEGORY;
 @property (nonatomic) UInt32 BLOCK_CATEGORY;
@@ -29,7 +30,6 @@
 +(Universe *)sharedInstance;
 
 -(void)setGameViewController:(GameViewController *)gameViewControllerIn;
--(void)loadLevels;
 -(void)setLevel;
 -(void)nextLevel;
 -(void)startLevel;

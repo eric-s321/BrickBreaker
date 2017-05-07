@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "Universe.h"
+#import "LevelReader.h"
+#import "Block.h"
+#import "Level.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +21,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [[Universe sharedInstance] loadLevels];
+    LevelReader *levelReader = [[LevelReader alloc] init];
+    [levelReader startParsing];
+    
+    //Add levels from the XML file to Universe levels
+    [Universe sharedInstance].levels = [[NSArray alloc] initWithArray:levelReader.levels];
+    [Universe sharedInstance].NUM_LEVELS = levelReader.numLevels;
+    NSLog(@"Num levels is %d", levelReader.numLevels);
     
     UIViewController *gameViewController = [self.window rootViewController];
     [[Universe sharedInstance] setGameViewController:(GameViewController *)gameViewController];
