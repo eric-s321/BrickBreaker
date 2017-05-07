@@ -90,6 +90,7 @@
         [self addChild:star];
     }
     
+    
     tapScreenLabel = [[SKLabelNode alloc] initWithFontNamed:@"Avenir"];
     tapScreenLabel.fontSize = 30;
     tapScreenLabel.text = [NSString stringWithFormat:@"Tap Screen to Start"];
@@ -109,6 +110,11 @@
         [star removeFromParent];
     }
     
+    //If tap screen label is leftover because user started a new game get rid of it
+    if([self intersectsNode:tapScreenLabel]){
+        [tapScreenLabel removeFromParent];
+    }
+        
     paddle.position = PADDLE_START_POSITION;
     ball.position = BALL_START_POSITION;
     ball.physicsBody.dynamic = NO;  //Start ball stationary
