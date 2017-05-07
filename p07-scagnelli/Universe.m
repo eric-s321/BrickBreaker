@@ -65,6 +65,20 @@ static Universe *singleton = nil;
 -(void)nextLevel{
     if(levelIndex + 1 < NUM_LEVELS)
         levelIndex++;
+/*
+    if(levelIndex + 1 < NUM_LEVELS){
+        levelIndex++;
+        return YES;
+    }
+    else{//ran out of levels
+        NSLog(@"RAN OUT OF LEVELS");
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        UIViewController *noMoreLevelsController = [storyBoard instantiateViewControllerWithIdentifier:@"NoMoreLevelsController"];
+        UIViewController *initialController = [storyBoard instantiateInitialViewController];
+        [initialController presentViewController:noMoreLevelsController animated:YES completion:nil];
+        return NO;
+    }
+*/
 }
 
 -(void)startLevel{

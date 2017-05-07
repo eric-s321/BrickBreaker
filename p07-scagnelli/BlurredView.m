@@ -140,8 +140,15 @@
 -(void)presentGameScene{
     [[Universe sharedInstance] clearLevel];
     [[Universe sharedInstance] nextLevel];
+    
     [[Universe sharedInstance] setLevel];
     [[Universe sharedInstance] startLevel];
+/*
+    if(nextLevel){
+        [[Universe sharedInstance] setLevel];
+        [[Universe sharedInstance] startLevel];
+    }
+*/
     
     [self removeFromSuperview];
 }

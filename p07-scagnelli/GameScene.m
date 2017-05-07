@@ -96,6 +96,7 @@
     [_gameDelegate setUpLevel:currentLevel.possibleScore];
     
     [self addChild:tapScreenLabel];
+    NSLog(@"Added tap screen to start label %@", tapScreenLabel);
     currentRoundPoints = 0;
 }
 
@@ -252,6 +253,7 @@
         ball.physicsBody.dynamic = YES; //Allow ball to move
         ballImpulse = CGVectorMake(0, -30);  //Set impulse for the ball
         [ball.physicsBody applyImpulse:ballImpulse];
+        NSLog(@"Removing tap screen label %@", tapScreenLabel);
         [tapScreenLabel removeFromParent];
     }
 }
