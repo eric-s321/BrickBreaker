@@ -140,7 +140,10 @@
     [scene clearBlocksAndStars];
     [[Universe sharedInstance] setLevelIndex:0];
     [[Universe sharedInstance] setLevel];
-    [[Universe sharedInstance] getCurrentLevel].levelBegan = NO;
+    //set all levels to did not begin
+    for(Level *level in [Universe sharedInstance].levels){
+        level.levelBegan = NO;
+    }
     [self resetTotalScore];
     [[Universe sharedInstance] startLevel];
 }
