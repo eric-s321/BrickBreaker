@@ -24,6 +24,8 @@
 		B68368821EB2F1A80007EB3B /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = B68368811EB2F1A80007EB3B /* Level.m */; };
 		B68368851EB2FB870007EB3B /* Universe.m in Sources */ = {isa = PBXBuildFile; fileRef = B68368841EB2FB870007EB3B /* Universe.m */; };
 		B68368881EB3C6820007EB3B /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = B68368871EB3C6820007EB3B /* Star.m */; };
+		B6A09CD51EBEF37D00323679 /* LevelData.xml in Resources */ = {isa = PBXBuildFile; fileRef = B6A09CD41EBEF37D00323679 /* LevelData.xml */; };
+		B6A09CD81EBEF65700323679 /* LevelReader.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A09CD71EBEF65700323679 /* LevelReader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,9 @@
 		B68368841EB2FB870007EB3B /* Universe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Universe.m; sourceTree = "<group>"; };
 		B68368861EB3C6820007EB3B /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
 		B68368871EB3C6820007EB3B /* Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Star.m; sourceTree = "<group>"; };
+		B6A09CD41EBEF37D00323679 /* LevelData.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LevelData.xml; sourceTree = "<group>"; };
+		B6A09CD61EBEF65700323679 /* LevelReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelReader.h; sourceTree = "<group>"; };
+		B6A09CD71EBEF65700323679 /* LevelReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelReader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +142,8 @@
 				B61F79B01EB45920009437D2 /* BlurredView.m */,
 				B68368831EB2FB870007EB3B /* Universe.h */,
 				B68368841EB2FB870007EB3B /* Universe.m */,
+				B6A09CD61EBEF65700323679 /* LevelReader.h */,
+				B6A09CD71EBEF65700323679 /* LevelReader.m */,
 				B67CDB791EADC63900B7B433 /* Block.h */,
 				B67CDB7A1EADC63900B7B433 /* Block.m */,
 				B68368861EB3C6820007EB3B /* Star.h */,
@@ -149,6 +156,7 @@
 				B67CDB751EADC42700B7B433 /* BrokenBlock.sks */,
 				B67C239C1EA862F100742831 /* Supporting Files */,
 				B67CDB761EADC42700B7B433 /* Assets.xcassets */,
+				B6A09CD41EBEF37D00323679 /* LevelData.xml */,
 			);
 			path = Brick_Breaker;
 			sourceTree = "<group>";
@@ -293,6 +301,7 @@
 				B67C23B31EA862F100742831 /* LaunchScreen.storyboard in Resources */,
 				B67C23A51EA862F100742831 /* Actions.sks in Resources */,
 				B67CDB781EADC42700B7B433 /* Assets.xcassets in Resources */,
+				B6A09CD51EBEF37D00323679 /* LevelData.xml in Resources */,
 				B67CDB771EADC42700B7B433 /* BrokenBlock.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B68368821EB2F1A80007EB3B /* Level.m in Sources */,
+				B6A09CD81EBEF65700323679 /* LevelReader.m in Sources */,
 				B67C23AB1EA862F100742831 /* GameViewController.m in Sources */,
 				B68368851EB2FB870007EB3B /* Universe.m in Sources */,
 				B68368881EB3C6820007EB3B /* Star.m in Sources */,

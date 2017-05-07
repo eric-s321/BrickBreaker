@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level>
+    <bricks>
+        <coord>
+            <x>-262.5</x>
+            <y>200</y>
+        </coord>
+        <coord>
+            <x>-242.5</x>
+            <y>400</y>
+        </coord>
+        <coord>
+            <x>-222.5</x>
+            <y>600</y>
+        </coord>
+        <coord>
+            <x>262.5</x>
+            <y>200</y>
+        </coord>
+        <coord>
+            <x>242.5</x>
+            <y>400</y>
+        </coord>
+        <coord>
+            <x>222.5</x>
+            <y>600</y>
+        </coord>
+    </bricks>
+    <stars>
+        <coord>
+            <x>0</x>
+            <y>350</y>
+        </coord>
+        <coord>
+            <x>100</x>
+            <y>-350</y>
+        </coord>
+    </stars>
+</level>
