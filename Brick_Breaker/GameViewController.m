@@ -33,12 +33,12 @@
     [skView presentScene:scene];
     
     [scene setGameDelegate:self];
+    [[Universe sharedInstance] setGameDelegate:self];
     
     [[Universe sharedInstance] setGameViewController:self];
     
     [scene setCurrentLevel:[[Universe sharedInstance] getCurrentLevel]];
     [scene levelSetup:1000];
-    
     
 /*
     skView.showsFPS = YES;
@@ -151,6 +151,12 @@
 -(void)resetTotalScore{
     totalScoreInt = 0;
     totalScoreLabel.text = [NSString stringWithFormat:@"%d", totalScoreInt];
+}
+
+-(void)presentNoMoreLevelsController{
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UIViewController *noMoreLevelsView = [storyBoard instantiateViewControllerWithIdentifier:@"NoMoreLevelsController"];
+    [self presentViewController:noMoreLevelsView animated:YES completion:nil];
 }
 
 @end

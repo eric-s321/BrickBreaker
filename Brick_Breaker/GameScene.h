@@ -18,6 +18,7 @@
 -(void) showLostLevelScreen;
 -(int) getLevelScore;
 -(int) getTotalScore;
+-(void)presentNoMoreLevelsController;
 @end
 
 @interface GameScene : SKScene <SKPhysicsContactDelegate>{

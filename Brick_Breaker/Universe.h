@@ -7,15 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GameScene.h"
 
 @class GameViewController;
 @class Level;
+
 
 @interface Universe : NSObject{
     GameViewController *gameViewController;
     int levelIndex;
 }
 
+@property (strong, nonatomic) id<GameDelegate> gameDelegate;
 @property (strong, nonatomic) NSArray *levels;
 @property (nonatomic) int NUM_LEVELS;
 @property (nonatomic) UInt32 BALL_CATEGORY;

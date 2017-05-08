@@ -25,6 +25,7 @@
 -(IBAction)resumeGame:(UIStoryboardSegue *)segue;
 -(IBAction)restartLevel:(UIStoryboardSegue *)segue;
 -(void)setGameSceneLevel:(Level *)level;
+-(void)totalScoreChanged:(int)difference;
 -(void)nextLevel;
 -(void)clearLevel;
 -(IBAction)newGame:(UIStoryboardSegue *)segue;

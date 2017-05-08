@@ -58,6 +58,8 @@ static Universe *singleton = nil;
 -(void)nextLevel{
     if(levelIndex + 1 < NUM_LEVELS)
         levelIndex++;
+    else
+        [_gameDelegate presentNoMoreLevelsController];
 /*
     if(levelIndex + 1 < NUM_LEVELS){
         levelIndex++;
