@@ -26,6 +26,7 @@
 		B68368881EB3C6820007EB3B /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = B68368871EB3C6820007EB3B /* Star.m */; };
 		B6A09CD51EBEF37D00323679 /* LevelData.xml in Resources */ = {isa = PBXBuildFile; fileRef = B6A09CD41EBEF37D00323679 /* LevelData.xml */; };
 		B6A09CD81EBEF65700323679 /* LevelReader.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A09CD71EBEF65700323679 /* LevelReader.m */; };
+		B6A09CDA1EC0153000323679 /* lunchds.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B6A09CD91EC0153000323679 /* lunchds.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		B6A09CD41EBEF37D00323679 /* LevelData.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LevelData.xml; sourceTree = "<group>"; };
 		B6A09CD61EBEF65700323679 /* LevelReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelReader.h; sourceTree = "<group>"; };
 		B6A09CD71EBEF65700323679 /* LevelReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelReader.m; sourceTree = "<group>"; };
+		B6A09CD91EC0153000323679 /* lunchds.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lunchds.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 		B67C239C1EA862F100742831 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B6A09CD91EC0153000323679 /* lunchds.ttf */,
 				B67C239D1EA862F100742831 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -296,6 +299,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6A09CDA1EC0153000323679 /* lunchds.ttf in Resources */,
 				B67C23AE1EA862F100742831 /* Main.storyboard in Resources */,
 				B67C23A31EA862F100742831 /* GameScene.sks in Resources */,
 				B67C23B31EA862F100742831 /* LaunchScreen.storyboard in Resources */,

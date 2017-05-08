@@ -255,6 +255,7 @@
 }
 
 - (void)touchUpAtPoint:(CGPoint)pos{
+    NSLog(@"x: %f\ty: %f", pos.x, pos.y);
     if(!currentLevel.levelBegan && !ball.physicsBody.dynamic){
         ball.physicsBody.dynamic = YES; //Allow ball to move
         ballImpulse = CGVectorMake(0, -30);  //Set impulse for the ball

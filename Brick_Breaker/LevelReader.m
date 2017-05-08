@@ -10,8 +10,6 @@
 #import "Block.h"
 #import "Level.h"
 
-#define BLOCK_WIDTH 150
-#define BLOCK_HEIGHT 30
 #define STAR_WIDTH 75
 #define STAR_HEIGHT 75
 #define STAR_VALUE 500
@@ -53,10 +51,11 @@
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI
                 qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
-    if([elementName isEqualToString:@"coord"])
+    if([elementName isEqualToString:@"block"] || [elementName isEqualToString:@"star"])
         coordDict = [[NSMutableDictionary alloc] init];
     
-    if ([elementName isEqualToString:@"x"] || [elementName isEqualToString:@"y"])
+    if([elementName isEqualToString:@"x"] || [elementName isEqualToString:@"y"] || [elementName isEqualToString:@"width"] ||
+        [elementName isEqualToString:@"height"])
         readingCoord = YES;
     else
         readingCoord = NO;
@@ -92,18 +91,22 @@
     else if ([elementName isEqualToString:@"stars"]){
         readingStars = NO;
     }
-    else if ([elementName isEqualToString:@"coord"]){
+    else if ([elementName isEqualToString:@"block"] || [elementName isEqualToString:@"star"]){
         if(readingBlocks)
             [blocks addObject:coordDict];
         else if(readingStars)
             [stars addObject:coordDict];
     }
-    else if ([elementName isEqualToString:@"x"]){
+    else if ([elementName isEqualToString:@"x"] || [elementName isEqualToString:@"y"] ||
+             [elementName isEqualToString:@"width"] || [elementName isEqualToString:@"height"]){
         [coordDict setObject:coordStr forKey:elementName];
     }
+    /*
     else if ([elementName isEqualToString:@"y"]){
         [coordDict setObject:coordStr forKey:elementName];
     }
+    else if ([elementName isEqualToString:@"width"])
+     */
 }
 
 -(void)createLevel{
@@ -112,18 +115,21 @@
     Level *level = [[Level alloc] init];
     float x = 0.0;
     float y = 0.0;
+    float width = 0.0;
+    float height = 0.0;
     
     for(NSMutableDictionary *dict in blocks){
         for(id key in dict){
-            if([key isEqualToString:@"x"]){
+            if([key isEqualToString:@"x"])
                 x = [[dict objectForKey:key] floatValue];
-            }
-            else if([key isEqualToString:@"y"]){
+            else if([key isEqualToString:@"y"])
                 y = [[dict objectForKey:key] floatValue];
-            }
+            else if([key isEqualToString:@"width"])
+                width = [[dict objectForKey:key] floatValue];
+            else if([key isEqualToString:@"height"])
+                height = [[dict objectForKey:key] floatValue];
         }
-        Block *block = [[Block alloc] initWithRect:CGRectMake(x, y, BLOCK_WIDTH, BLOCK_HEIGHT)
-                                                 color:[UIColor redColor]];
+        Block *block = [[Block alloc] initWithRect:CGRectMake(x, y, width, height) color:[UIColor redColor]];
         [level.blocks addObject:block];
     }
     

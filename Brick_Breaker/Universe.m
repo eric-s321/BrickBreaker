@@ -31,7 +31,7 @@ static Universe *singleton = nil;
         PADDLE_CATEGORY = 0x1 << 3;
         BORDER_CATEGORY = 0x1 << 4;
         STAR_CATEGORY = 0x1 << 5;
-        levelIndex = 0;
+        levelIndex = 3;
         
         singleton = self;
     }
