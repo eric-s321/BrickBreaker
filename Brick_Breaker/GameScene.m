@@ -91,7 +91,7 @@
     }
     
     
-    tapScreenLabel = [[SKLabelNode alloc] initWithFontNamed:@"Avenir"];
+    tapScreenLabel = [[SKLabelNode alloc] initWithFontNamed:@"Lunchtime Doubly So"];
     tapScreenLabel.fontSize = 30;
     tapScreenLabel.text = [NSString stringWithFormat:@"Tap Screen to Start"];
     [_gameDelegate setUpLevel:currentLevel.possibleScore];
@@ -113,6 +113,11 @@
     //If tap screen label is leftover because user started a new game get rid of it
     if([self intersectsNode:tapScreenLabel]){
         [tapScreenLabel removeFromParent];
+    }
+    
+    for(id child in self.children){
+        if([child isMemberOfClass:[SKLabelNode class]]) //get rid of left over point labels
+            [child removeFromParent];
     }
         
     paddle.position = PADDLE_START_POSITION;

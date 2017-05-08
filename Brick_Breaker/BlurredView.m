@@ -17,6 +17,8 @@
     NSLog(@"In blurred view constructor");
     self = [super initWithFrame:frame];
     
+    NSString *FONT = @"Lunchtime Doubly So";
+    
     if(self){
         levelScoreInt = 0;
         finalLevelScore = levelScore;
@@ -48,7 +50,7 @@
                                     CGRectMake(xCenter - bigLabelWidth/2, yCoord, bigLabelWidth, bigLabelHeight)];
 //        levelCompleteLabel.backgroundColor = [UIColor redColor];
         levelCompleteLabel.text = @"Level Complete!";
-        levelCompleteLabel.font = [UIFont fontWithName:@"Avenir" size:35];
+        levelCompleteLabel.font = [UIFont fontWithName:FONT size:35];
         levelCompleteLabel.textColor = [UIColor whiteColor];
         levelCompleteLabel.numberOfLines = 2;
         [levelCompleteLabel setTextAlignment:NSTextAlignmentCenter];
@@ -60,7 +62,7 @@
                                      CGRectMake((xCenter / 2) - smallLabelWidth/2 + LABEL_PADDING , yCoord, smallLabelWidth, smallLabelHeight)];
 //        levelPointsLabel.backgroundColor = [UIColor blueColor];
         levelPointsLabel.text = @"Level Score: ";
-        levelPointsLabel.font = [UIFont fontWithName:@"Avenir" size:22];
+        levelPointsLabel.font = [UIFont fontWithName:FONT size:22];
         levelPointsLabel.textColor = [UIColor whiteColor];
         levelPointsLabel.numberOfLines = 2;
         [levelPointsLabel setTextAlignment:NSTextAlignmentCenter];
@@ -70,7 +72,7 @@
                                      CGRectMake(xCenter * 1.5 - smallLabelWidth/2 - LABEL_PADDING, yCoord, smallLabelWidth, smallLabelHeight)];
 //        levelScoreLabel.backgroundColor = [UIColor blueColor];
         levelScoreLabel.text = [NSString stringWithFormat:@"%d", levelScoreInt];
-        levelScoreLabel.font = [UIFont fontWithName:@"Avenir" size:22];
+        levelScoreLabel.font = [UIFont fontWithName:FONT size:22];
         levelScoreLabel.textColor = [UIColor whiteColor];
         levelScoreLabel.numberOfLines = 2;
         [levelScoreLabel setTextAlignment:NSTextAlignmentCenter];
@@ -83,7 +85,7 @@
                                      CGRectMake(xCenter/2 - smallLabelWidth/2 + LABEL_PADDING, yCoord, smallLabelWidth, smallLabelHeight)];
 //        totalPointsLabel.backgroundColor = [UIColor blueColor];
         totalPointsLabel.text = @"Total Score: ";
-        totalPointsLabel.font = [UIFont fontWithName:@"Avenir" size:22];
+        totalPointsLabel.font = [UIFont fontWithName:FONT size:22];
         totalPointsLabel.textColor = [UIColor whiteColor];
         totalPointsLabel.numberOfLines = 2;
         [totalPointsLabel setTextAlignment:NSTextAlignmentCenter];
@@ -93,7 +95,7 @@
                                      CGRectMake(xCenter * 1.5 - smallLabelWidth/2 - LABEL_PADDING , yCoord, smallLabelWidth, smallLabelHeight)];
 //        totalScoreLabel.backgroundColor = [UIColor blueColor];
         totalScoreLabel.text = [NSString stringWithFormat:@"%d", totalScoreInt];
-        totalScoreLabel.font = [UIFont fontWithName:@"Avenir" size:22];
+        totalScoreLabel.font = [UIFont fontWithName:FONT size:22];
         totalScoreLabel.textColor = [UIColor whiteColor];
         totalScoreLabel.numberOfLines = 2;
         [totalScoreLabel setTextAlignment:NSTextAlignmentCenter];
@@ -107,7 +109,7 @@
         [btn setTitle:@"Continue" forState:UIControlStateNormal];
         [btn setBackgroundColor:[UIColor colorWithRed:0 green:128/255.0 blue:64/255.0 alpha:1]];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [btn.titleLabel setFont:[UIFont fontWithName:@"Avenir" size:24]];
+        [btn.titleLabel setFont:[UIFont fontWithName:FONT size:24]];
         [btn addTarget:self action:@selector(presentGameScene) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btn];
         

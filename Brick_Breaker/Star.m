@@ -29,7 +29,15 @@
 
 -(void)removeStar{
     NSLog(@"REMOVE STAR CALLED");
-    [self removeFromParent]; //remove from gamescene
+    SKLabelNode *pointsLabel = [[SKLabelNode alloc] initWithFontNamed:@"Lunchtime Doubly So"];
+    pointsLabel.fontSize = 30;
+    pointsLabel.text = [NSString stringWithFormat:@"+%d", self.value];
+    pointsLabel.position = CGPointMake(self.position.x, self.position.y + self.size.height/2);
+    
+    [self.scene addChild:pointsLabel];
+    
+    [self removeFromParent];
+    [pointsLabel runAction:[SKAction sequence:@[[SKAction fadeOutWithDuration:1],[SKAction removeFromParent]]]];
 }
 
 

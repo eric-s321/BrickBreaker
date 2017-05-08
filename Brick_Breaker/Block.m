@@ -40,8 +40,17 @@
     SKAction *wait = [SKAction waitForDuration:1.0];
     SKAction *remove = [SKAction removeFromParent];
     
+    
+    SKLabelNode *pointsLabel = [[SKLabelNode alloc] initWithFontNamed:@"Lunchtime Doubly So"];
+    pointsLabel.fontSize = 30;
+    pointsLabel.text = [NSString stringWithFormat:@"-%d", 100];
+    pointsLabel.position = CGPointMake(self.position.x, self.position.y + self.size.height/2);
+    
+    [gameScene addChild:pointsLabel];
+    
     [brokenBlock runAction:[SKAction sequence:@[wait,remove]]];
     [self removeFromParent];
+    [pointsLabel runAction:[SKAction sequence:@[[SKAction fadeOutWithDuration:1],remove]]];
 }
 
 @end
