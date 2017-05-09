@@ -30,5 +30,6 @@
 -(void)clearLevel;
 //-(IBAction)newGame:(UIStoryboardSegue *)segue;
 -(void)resetTotalScore;
+-(GameScene *)getGameScene;
 
 @end

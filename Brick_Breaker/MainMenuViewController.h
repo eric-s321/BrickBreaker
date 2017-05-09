@@ -13,4 +13,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *resumeBtn;
 @property (strong, nonatomic) IBOutlet UIButton *newgameBtn;
 
+-(IBAction)newGame;
+
 @end

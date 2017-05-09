@@ -35,7 +35,7 @@
     [scene setGameDelegate:self];
     [[Universe sharedInstance] setGameDelegate:self];
     
-    [[Universe sharedInstance] setGameViewController:self];
+    //[[Universe sharedInstance] setGameViewController:self];
     
     [scene setCurrentLevel:[[Universe sharedInstance] getCurrentLevel]];
     [scene levelSetup:1000];
@@ -137,9 +137,7 @@
 
 /*
 -(IBAction)newGame:(UIStoryboardSegue *)segue{
-    [[Universe sharedInstance] setGameViewController:self];
-    [[Universe sharedInstance] setLevel];
-    
+    NSLog(@"IN HERE");
     totalScoreInt = 0;
     [scene clearBlocksAndStars];
     [[Universe sharedInstance] setLevelIndex:0];
@@ -150,8 +148,16 @@
     }
     [self resetTotalScore];
     [[Universe sharedInstance] startLevel];
+    
+    GameViewController *gameViewController;
+    if([[Universe sharedInstance]gameViewControllerIsNull])
+        gameViewController = self;
+    else
+        gameViewController = [[Universe sharedInstance] getGameViewController];
+    
+    [self presentViewController:gameViewController animated:YES completion:nil];
 }
- */
+*/
 
 -(void)resetTotalScore{
     totalScoreInt = 0;
@@ -162,6 +168,10 @@
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     UIViewController *noMoreLevelsView = [storyBoard instantiateViewControllerWithIdentifier:@"NoMoreLevelsController"];
     [self presentViewController:noMoreLevelsView animated:YES completion:nil];
+}
+
+-(GameScene *)getGameScene{
+    return scene;
 }
 
 @end

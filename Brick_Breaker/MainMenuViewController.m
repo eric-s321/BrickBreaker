@@ -8,6 +8,8 @@
 
 #import "MainMenuViewController.h"
 #import "Universe.h"
+#import "GameViewController.h"
+#import "Level.h"
 
 @interface MainMenuViewController ()
 
@@ -41,6 +43,32 @@
 -(void)enableBtn:(UIButton *) btn{
     btn.enabled = YES;
     btn.alpha = 1;
+}
+
+-(IBAction)newGame{
+    
+    //If a game view controller already exists remove all the nodes from the gamescene
+    if(![[Universe sharedInstance] gameViewControllerIsNull]){
+        GameViewController *gameViewController = [[Universe sharedInstance] getGameViewController];
+        GameScene *gameScene = [gameViewController getGameScene];
+        [gameScene clearBlocksAndStars];
+    }
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UIViewController *newGameController = [storyBoard instantiateViewControllerWithIdentifier:@"GameViewController"];
+    
+    [[Universe sharedInstance] setGameViewController:(GameViewController *)newGameController];
+    
+    [[Universe sharedInstance] setLevelIndex:0];
+    [[Universe sharedInstance] setLevel];
+    //set all levels to did not begin
+    for(Level *level in [Universe sharedInstance].levels){
+        level.levelBegan = NO;
+    }
+    [[Universe sharedInstance] startLevel];
+    
+    [self presentViewController:newGameController animated:YES completion:nil];
+    
 }
 
 /*

@@ -41,5 +41,6 @@
 -(void)incrementTotalScore:(int)score;
 -(void)setLevelIndex:(int)newIndex;
 -(BOOL)gameViewControllerIsNull;
+-(GameViewController *)getGameViewController;
 
 @end

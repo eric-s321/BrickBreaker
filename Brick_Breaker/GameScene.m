@@ -271,7 +271,11 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
+    for (UITouch *t in touches){
+        
+        CGPoint loc = [t locationInNode:self];
+        NSLog(@"first point is x:%f\ty:%f", loc.x, loc.y);
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -285,6 +289,8 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     for (UITouch *t in touches){
         [self touchUpAtPoint:[t locationInNode:self]];
+        CGPoint loc = [t locationInNode:self];
+        NSLog(@"end point is x:%f\ty:%f", loc.x, loc.y);
     }
 }
 

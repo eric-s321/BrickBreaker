@@ -114,4 +114,9 @@ static Universe *singleton = nil;
         return NO;
     return YES;
 }
+
+-(GameViewController *)getGameViewController{
+    return gameViewController;
+}
+    
 @end
