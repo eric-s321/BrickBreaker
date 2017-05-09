@@ -17,6 +17,8 @@
     SKSpriteNode *paddle;
     SKShapeNode *ball;
     CGVector ballImpulse;
+    CGPoint twoFingerTouch1;
+    CGPoint twoFingerTouch2;
 }
 @synthesize currentRoundPoints;
 
@@ -26,6 +28,8 @@
     universe = [Universe sharedInstance];
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     self.physicsBody.friction = 0;
+    
+    self.view.multipleTouchEnabled = YES;
     
     //Remove all gravity
     self.physicsWorld.gravity = CGVectorMake(0, 0);
@@ -90,7 +94,6 @@
         [self addChild:star];
     }
     
-    
     tapScreenLabel = [[SKLabelNode alloc] initWithFontNamed:@"Lunchtime Doubly So"];
     tapScreenLabel.fontSize = 30;
     tapScreenLabel.text = [NSString stringWithFormat:@"Tap Screen to Start"];
@@ -119,7 +122,9 @@
         if([child isMemberOfClass:[SKLabelNode class]]) //get rid of left over point labels
             [child removeFromParent];
     }
-        
+    
+    [ball removeAllActions];
+    
     paddle.position = PADDLE_START_POSITION;
     ball.position = BALL_START_POSITION;
     ball.physicsBody.dynamic = NO;  //Start ball stationary
@@ -271,32 +276,113 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    float avgX = 0;
+    float avgY = 0;
     for (UITouch *t in touches){
-        
         CGPoint loc = [t locationInNode:self];
-        NSLog(@"first point is x:%f\ty:%f", loc.x, loc.y);
+        //Two finger touch
+        if([[event touchesForView:self.view] count] == 2){
+            avgX += loc.x;
+            avgY += loc.y;
+        }
     }
+    
+    avgX /= 2.0;
+    avgY /= 2.0;
+    
+    if([[event touchesForView:self.view] count] == 2){
+        NSLog(@"BEGIN avg X is %f avg Y is %f", avgX, avgY);
+        twoFingerTouch1 = CGPointMake(avgX, avgY);
+    }
+    
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     for (UITouch *t in touches)
     {
-        CGPoint oldLocation = [t previousLocationInNode:self];
-        [self touchMovedToPoint:[t locationInNode:self] fromPoint:oldLocation];
+        //Single finger touch - move paddle
+        if([[event touchesForView:self.view] count] == 1){
+            CGPoint oldLocation = [t previousLocationInNode:self];
+            [self touchMovedToPoint:[t locationInNode:self] fromPoint:oldLocation];
+        }
     }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    float avgX = 0;
+    float avgY = 0;
+    
     for (UITouch *t in touches){
-        [self touchUpAtPoint:[t locationInNode:self]];
         CGPoint loc = [t locationInNode:self];
-        NSLog(@"end point is x:%f\ty:%f", loc.x, loc.y);
+        
+        //Single finer touch - move paddle
+        if([[event touchesForView:self.view] count] == 1){
+            [self touchUpAtPoint:[t locationInNode:self]];
+        }
+        
+        //Two finger touch
+        else if([[event touchesForView:self.view] count] == 2){
+            avgX += loc.x;
+            avgY += loc.y;
+        }
+    }
+    
+    avgX /= 2.0;
+    avgY /= 2.0;
+    
+    if([[event touchesForView:self.view] count] == 2){
+        NSLog(@"END avg X is %f avg Y is %f", avgX, avgY);
+        CGPoint oldPoint = ball.position;
+        twoFingerTouch2 = CGPointMake(avgX, avgY);
+        [ball runAction:[SKAction moveTo:twoFingerTouch2 duration:2.0]];
+        ball.physicsBody.velocity = CGVectorMake(twoFingerTouch2.x - oldPoint.x,
+                                    twoFingerTouch2.y - oldPoint.y);
+   //     [self activateSpecial:twoFingerTouch1 touch2:twoFingerTouch2];
     }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     for (UITouch *t in touches) {[self touchUpAtPoint:[t locationInNode:self]];}
 }
+
+/*
+-(void) activateSpecial:(CGPoint)touch1 touch2:(CGPoint)touch2{
+    float changeX = touch2.x - touch1.x;
+    float changeY = touch1.y = touch2.y;
+    
+    NSLog(@"Change x is %f", changeX);
+    NSLog(@"CHange y is %f", changeY);
+    
+    [ball.physicsBody applyImpulse:CGVectorMake(changeX / 10, changeY / 10)];
+    
+    float radians = atan(changeY/changeX);
+    
+    float degrees = 180 * radians / M_PI;
+    
+    float angle;
+    if (changeX > 0 && changeY > 0){
+        NSLog(@"POS X POS Y");
+        angle = degrees;
+    }
+    else if (changeX < 0 && changeY > 0){
+        NSLog(@"NEG X POS Y");
+        angle = 180 + degrees;
+    }
+    else if (changeX < 0 && changeY < 0){
+        NSLog(@"NEG X NEG Y");
+        angle = 180 + degrees;
+    }
+    else{
+        NSLog(@"POS X NEG Y");
+        angle = 360 + degrees;
+    }
+    NSLog(@"Angle is: %f",angle);
+    
+    if(touch2.x < touch1.x){
+        NSLog(@"Moved left");
+    }
+}
+*/
 
 
 //Called before each frame is rendered
