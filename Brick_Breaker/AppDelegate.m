@@ -29,9 +29,11 @@
     [Universe sharedInstance].NUM_LEVELS = levelReader.numLevels;
     NSLog(@"Num levels is %d", levelReader.numLevels);
     
+    /*
     UIViewController *gameViewController = [self.window rootViewController];
     [[Universe sharedInstance] setGameViewController:(GameViewController *)gameViewController];
     [[Universe sharedInstance] setLevel];
+     */
     
     return YES;
 }

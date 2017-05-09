@@ -28,7 +28,7 @@
 -(void)totalScoreChanged:(int)difference;
 -(void)nextLevel;
 -(void)clearLevel;
--(IBAction)newGame:(UIStoryboardSegue *)segue;
+//-(IBAction)newGame:(UIStoryboardSegue *)segue;
 -(void)resetTotalScore;
 
 @end

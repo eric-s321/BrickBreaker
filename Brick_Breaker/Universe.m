@@ -31,7 +31,7 @@ static Universe *singleton = nil;
         PADDLE_CATEGORY = 0x1 << 3;
         BORDER_CATEGORY = 0x1 << 4;
         STAR_CATEGORY = 0x1 << 5;
-        levelIndex = 3;
+        levelIndex = 0;
         
         singleton = self;
     }
@@ -48,6 +48,7 @@ static Universe *singleton = nil;
 }
 
 -(void)setGameViewController:(GameViewController *)gameViewControllerIn{
+    NSLog(@"SETTING GAME VIEW CONTROLLER");
     gameViewController = gameViewControllerIn;
 }
 
@@ -108,4 +109,9 @@ static Universe *singleton = nil;
 }
 */
 
+-(BOOL)gameViewControllerIsNull{
+    if(gameViewController)
+        return NO;
+    return YES;
+}
 @end

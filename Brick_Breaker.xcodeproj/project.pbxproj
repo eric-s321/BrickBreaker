@@ -27,6 +27,7 @@
 		B6A09CD51EBEF37D00323679 /* LevelData.xml in Resources */ = {isa = PBXBuildFile; fileRef = B6A09CD41EBEF37D00323679 /* LevelData.xml */; };
 		B6A09CD81EBEF65700323679 /* LevelReader.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A09CD71EBEF65700323679 /* LevelReader.m */; };
 		B6A09CDA1EC0153000323679 /* lunchds.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B6A09CD91EC0153000323679 /* lunchds.ttf */; };
+		B6C6DF541EC1620100B3B98D /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C6DF531EC1620100B3B98D /* MainMenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,8 @@
 		B6A09CD61EBEF65700323679 /* LevelReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelReader.h; sourceTree = "<group>"; };
 		B6A09CD71EBEF65700323679 /* LevelReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelReader.m; sourceTree = "<group>"; };
 		B6A09CD91EC0153000323679 /* lunchds.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lunchds.ttf; sourceTree = "<group>"; };
+		B6C6DF521EC1620100B3B98D /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
+		B6C6DF531EC1620100B3B98D /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +143,8 @@
 				B67C23A71EA862F100742831 /* GameScene.m */,
 				B67C23A91EA862F100742831 /* GameViewController.h */,
 				B67C23AA1EA862F100742831 /* GameViewController.m */,
+				B6C6DF521EC1620100B3B98D /* MainMenuViewController.h */,
+				B6C6DF531EC1620100B3B98D /* MainMenuViewController.m */,
 				B61F79AF1EB45920009437D2 /* BlurredView.h */,
 				B61F79B01EB45920009437D2 /* BlurredView.m */,
 				B68368831EB2FB870007EB3B /* Universe.h */,
@@ -337,6 +342,7 @@
 				B68368851EB2FB870007EB3B /* Universe.m in Sources */,
 				B68368881EB3C6820007EB3B /* Star.m in Sources */,
 				B67C23A11EA862F100742831 /* AppDelegate.m in Sources */,
+				B6C6DF541EC1620100B3B98D /* MainMenuViewController.m in Sources */,
 				B67C23A81EA862F100742831 /* GameScene.m in Sources */,
 				B67CDB7B1EADC63900B7B433 /* Block.m in Sources */,
 				B67C239E1EA862F100742831 /* main.m in Sources */,
