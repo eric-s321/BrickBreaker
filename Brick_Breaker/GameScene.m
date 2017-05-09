@@ -17,8 +17,6 @@
     SKSpriteNode *paddle;
     SKShapeNode *ball;
     CGVector ballImpulse;
-    CGPoint twoFingerTouch1;
-    CGPoint twoFingerTouch2;
 }
 @synthesize currentRoundPoints;
 
@@ -64,7 +62,6 @@
     bottom.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:bottomRect];
     [self addChild:bottom];
     
-    
     //Set up category bit masks
     bottom.physicsBody.categoryBitMask = universe.BOTTOM_CATEGORY;
     ball.physicsBody.categoryBitMask = universe.BALL_CATEGORY;
@@ -78,6 +75,56 @@
                     universe.BLOCK_CATEGORY ;
     
     currentRoundPoints = 0;
+    
+    
+    //Set up two finger swipe gestures
+    UISwipeGestureRecognizer *twoFingerLeft = [[UISwipeGestureRecognizer alloc]
+                                        initWithTarget:self action:@selector(handleSwipes:)];
+    UISwipeGestureRecognizer *twoFingerRight = [[UISwipeGestureRecognizer alloc]
+                                        initWithTarget:self action:@selector(handleSwipes:)];
+    UISwipeGestureRecognizer *twoFingerDown = [[UISwipeGestureRecognizer alloc]
+                                        initWithTarget:self action:@selector(handleSwipes:)];
+    UISwipeGestureRecognizer *twoFingerUp = [[UISwipeGestureRecognizer alloc]
+                                        initWithTarget:self action:@selector(handleSwipes:)];
+    
+    //Set directions for swipe gestures
+    [twoFingerLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [twoFingerRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    [twoFingerUp setDirection:UISwipeGestureRecognizerDirectionUp];
+    [twoFingerDown setDirection:UISwipeGestureRecognizerDirectionDown];
+    
+    //Make two fingers required
+    [twoFingerLeft setNumberOfTouchesRequired:2];
+    [twoFingerRight setNumberOfTouchesRequired:2];
+    [twoFingerUp setNumberOfTouchesRequired:2];
+    [twoFingerDown setNumberOfTouchesRequired:2];
+    
+    [[self view] addGestureRecognizer:twoFingerLeft];
+    [[self view] addGestureRecognizer:twoFingerRight];
+    [[self view] addGestureRecognizer:twoFingerUp];
+    [[self view] addGestureRecognizer:twoFingerDown];
+}
+
+-(void)handleSwipes:(UISwipeGestureRecognizer *)recognizer {
+    int swipePower = 20;
+    switch ([recognizer direction]) {
+        case UISwipeGestureRecognizerDirectionLeft:
+            [ball.physicsBody applyImpulse:CGVectorMake(-swipePower, 0)];
+            break;
+        case UISwipeGestureRecognizerDirectionRight:
+            [ball.physicsBody applyImpulse:CGVectorMake(swipePower, 0)];
+            break;
+        case UISwipeGestureRecognizerDirectionUp:
+            [ball.physicsBody applyImpulse:CGVectorMake(0, swipePower)];
+            break;
+        case UISwipeGestureRecognizerDirectionDown:
+            [ball.physicsBody applyImpulse:CGVectorMake(0, -swipePower)];
+            break;
+        default:
+            break;
+    }
+    
+    [self boundVelocity];
 }
 
 -(void)levelSetup:(int)startingScore{
@@ -207,31 +254,30 @@
     if(ball.physicsBody.velocity.dx > 500){
         ball.physicsBody.velocity = CGVectorMake(500, ball.physicsBody.velocity.dy);
     }
-    if(ball.physicsBody.velocity.dx < -500){
-        ball.physicsBody.velocity = CGVectorMake(500, ball.physicsBody.velocity.dy);
+    else if(ball.physicsBody.velocity.dx < -500){
+        ball.physicsBody.velocity = CGVectorMake(-500, ball.physicsBody.velocity.dy);
     }
-    if(ball.physicsBody.velocity.dy < 550){
+    
+    if(ball.physicsBody.velocity.dy > 550)
         ball.physicsBody.velocity = CGVectorMake(ball.physicsBody.velocity.dx, 550);
+    if(ball.physicsBody.velocity.dy < -550){
+        ball.physicsBody.velocity = CGVectorMake(ball.physicsBody.velocity.dx, -550);
     }
     NSLog(@"AFTER\nBall velocity dx = %f dy = %f", ball.physicsBody.velocity.dx, ball.physicsBody.velocity.dy);
 }
 
 - (void)passedLevel{
-    NSLog(@"Beginning of passed level");
-    
     int levelScore = [_gameDelegate getLevelScore];
     int totalScore = [_gameDelegate getTotalScore];
     
     //Blur the background
     if(!UIAccessibilityIsReduceTransparencyEnabled()) {
-        NSLog(@"IN IF");
         self.view.backgroundColor = [UIColor clearColor];
         BlurredView *blurredView = [[BlurredView alloc]
                 initWithFrame:self.view.frame levelScore:levelScore totalScore:totalScore];
         [self.view addSubview:blurredView];
     }
     else{
-        NSLog(@"IN ELSE");
         self.view.backgroundColor = [UIColor blackColor];
         UIView *regView = [[UIView alloc] initWithFrame:self.view.frame];
         [self.view addSubview:regView];
@@ -276,24 +322,6 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    float avgX = 0;
-    float avgY = 0;
-    for (UITouch *t in touches){
-        CGPoint loc = [t locationInNode:self];
-        //Two finger touch
-        if([[event touchesForView:self.view] count] == 2){
-            avgX += loc.x;
-            avgY += loc.y;
-        }
-    }
-    
-    avgX /= 2.0;
-    avgY /= 2.0;
-    
-    if([[event touchesForView:self.view] count] == 2){
-        NSLog(@"BEGIN avg X is %f avg Y is %f", avgX, avgY);
-        twoFingerTouch1 = CGPointMake(avgX, avgY);
-    }
     
 }
 
@@ -329,60 +357,11 @@
     
     avgX /= 2.0;
     avgY /= 2.0;
-    
-    if([[event touchesForView:self.view] count] == 2){
-        NSLog(@"END avg X is %f avg Y is %f", avgX, avgY);
-        CGPoint oldPoint = ball.position;
-        twoFingerTouch2 = CGPointMake(avgX, avgY);
-        [ball runAction:[SKAction moveTo:twoFingerTouch2 duration:2.0]];
-        ball.physicsBody.velocity = CGVectorMake(twoFingerTouch2.x - oldPoint.x,
-                                    twoFingerTouch2.y - oldPoint.y);
-   //     [self activateSpecial:twoFingerTouch1 touch2:twoFingerTouch2];
-    }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     for (UITouch *t in touches) {[self touchUpAtPoint:[t locationInNode:self]];}
 }
-
-/*
--(void) activateSpecial:(CGPoint)touch1 touch2:(CGPoint)touch2{
-    float changeX = touch2.x - touch1.x;
-    float changeY = touch1.y = touch2.y;
-    
-    NSLog(@"Change x is %f", changeX);
-    NSLog(@"CHange y is %f", changeY);
-    
-    [ball.physicsBody applyImpulse:CGVectorMake(changeX / 10, changeY / 10)];
-    
-    float radians = atan(changeY/changeX);
-    
-    float degrees = 180 * radians / M_PI;
-    
-    float angle;
-    if (changeX > 0 && changeY > 0){
-        NSLog(@"POS X POS Y");
-        angle = degrees;
-    }
-    else if (changeX < 0 && changeY > 0){
-        NSLog(@"NEG X POS Y");
-        angle = 180 + degrees;
-    }
-    else if (changeX < 0 && changeY < 0){
-        NSLog(@"NEG X NEG Y");
-        angle = 180 + degrees;
-    }
-    else{
-        NSLog(@"POS X NEG Y");
-        angle = 360 + degrees;
-    }
-    NSLog(@"Angle is: %f",angle);
-    
-    if(touch2.x < touch1.x){
-        NSLog(@"Moved left");
-    }
-}
-*/
 
 
 //Called before each frame is rendered
