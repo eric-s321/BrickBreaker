@@ -186,4 +186,62 @@
             </star>
         </stars>
     </level>
+    <level num="4">
+        <blocks>
+            <block>
+                <x>-270</x>
+                <y>480</y>
+                <width>150</width>
+                <height>30</height>
+            </block>
+            <block>
+                <x>100</x>
+                <y>510</y>
+                <width>150</width>
+                <height>30</height>
+            </block>
+            <block>
+                <x>270</x>
+                <y>600</y>
+                <width>150</width>
+                <height>30</height>
+            </block>
+            <block>
+                <x>-290</x>
+                <y>-400</y>
+                <width>150</width>
+                <height>30</height>
+            </block>
+            <block>
+                <x>-100</x>
+                <y>-300</y>
+                <width>150</width>
+                <height>30</height>
+            </block>
+            <block>
+                <x>280</x>
+                <y>-470</y>
+                <width>150</width>
+                <height>30</height>
+            </block>
+        </blocks>
+        <stars>
+            <star>
+                <x>-300</x>
+                <y>-470</y>
+            </star>
+            <star>
+                <x>187</x>
+                <y>-350</y>
+            </star>
+            <star>
+                <x>-90</x>
+                <y>590</y>
+            </star>
+            <star>
+                <x>290</x>
+                <y>380</y>
+            </star>
+        </stars>
+    </level>
 </game>

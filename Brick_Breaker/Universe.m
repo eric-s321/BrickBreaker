@@ -31,7 +31,7 @@ static Universe *singleton = nil;
         PADDLE_CATEGORY = 0x1 << 3;
         BORDER_CATEGORY = 0x1 << 4;
         STAR_CATEGORY = 0x1 << 5;
-        levelIndex = 0;
+        levelIndex = 4;
         
         singleton = self;
     }
@@ -122,5 +122,59 @@ static Universe *singleton = nil;
 -(int)getLevelIndex{
     return levelIndex;
 }
+
+-(void)save{
+    NSLog(@"In save");
     
+    NSArray *dirs = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask];
+    NSError *err;
+    [[NSFileManager defaultManager] createDirectoryAtURL:[dirs objectAtIndex:0] withIntermediateDirectories:YES attributes:nil error:&err];
+    
+    NSURL *url = [NSURL URLWithString:@"high_scores.archive" relativeToURL:[dirs objectAtIndex:0]];
+    
+    NSMutableData *data = [[NSMutableData alloc] init];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    
+    /*
+    for (HighScore *highScore in highScores){
+        NSLog(@"Name: %@   Score: %d", highScore.name, highScore.score);
+    }
+     */
+    
+   // [archiver encodeObject:highScores forKey:@"highScores"];
+    
+    [archiver finishEncoding];
+    [data writeToURL:url atomically:YES];
+    
+    //    NSLog(@"Save the value %d for the counter", counter);
+    
+}
+
+-(void)load{
+    NSLog(@"In load");
+    
+    NSArray *dirs = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask];
+    NSError *err;
+    [[NSFileManager defaultManager] createDirectoryAtURL:[dirs objectAtIndex:0] withIntermediateDirectories:YES attributes:nil error:&err];
+    NSURL *url = [NSURL URLWithString:@"high_scores.archive" relativeToURL:[dirs objectAtIndex:0]];
+    
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    
+    if (!data)
+        return;
+    
+    NSKeyedUnarchiver *unarchiver;
+    
+    unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+//    highScores = [unarchiver decodeObjectForKey:@"highScores"];
+    
+    NSLog(@"Just loaded high scores:");
+/*
+    for (HighScore *highScore in highScores){
+        NSLog(@"Name: %@   Score: %d", highScore.name, highScore.score);
+    }
+*/
+    
+}
+
 @end
