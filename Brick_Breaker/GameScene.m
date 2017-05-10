@@ -12,6 +12,9 @@
 #import "BlurredView.h"
 #import "Level.h"
 #import "Universe.h"
+#import "PopUpView.h"
+
+#define SCORE_LABEL_HEIGHT 25
 
 @implementation GameScene {
     SKSpriteNode *paddle;
@@ -103,6 +106,66 @@
     [[self view] addGestureRecognizer:twoFingerRight];
     [[self view] addGestureRecognizer:twoFingerUp];
     [[self view] addGestureRecognizer:twoFingerDown];
+    
+    
+    ////////----------------TUTORIAL CODE-----------------------////////////////
+    tutorialMode = NO;
+    popupViews = [[NSMutableArray alloc] init];
+    popupIndex = -1;
+    
+    if([[Universe sharedInstance] getLevelIndex] == 0){
+        tutorialMode = YES;
+        
+        int viewHeight = 125;
+        int viewWidth = 175;
+        
+        CGRect frame = CGRectMake(CGRectGetMidX(self.view.frame) - viewWidth/2, CGRectGetMidY(self.view.frame) - viewHeight/2, viewWidth, viewHeight);
+        PopUpView *view = [[PopUpView alloc] initWithFrame:frame message:@"Collect all the stars while avoiding the blocks!" withArrow:NO arrowPosition:ARROW_NO_POSITION fontSize:20];
+        [view setPopupDelegate:self];
+        [popupViews addObject:view];
+        
+        frame = CGRectMake(frame.origin.x, self.view.frame.size.height - viewHeight - SCORE_LABEL_HEIGHT, frame.size.width, frame.size.height);
+        view = [[PopUpView alloc] initWithFrame:frame message:@"Lose 100 of these points for each block you destory" withArrow:YES arrowPosition:ARROW_BOTTOM_CENTER fontSize:18];
+        [view setPopupDelegate:self];
+        [popupViews addObject:view];
+        
+        frame = CGRectMake(self.view.frame.size.width - frame.size.width, frame.origin.y-100, frame.size.width, frame.size.height + 100);
+        view = [[PopUpView alloc] initWithFrame:frame message:@"Total score. Gain 500 points for every star you collect and 100 for any block left intact" withArrow:YES arrowPosition:ARROW_BOTTOM_RIGHT fontSize:18];
+        [view setPopupDelegate:self];
+        [popupViews addObject:view];
+    }
+    
+    
+    
+    //If there are popups to be shown show the first one
+    if([popupViews count] > 0)
+        [self displayNextPopup];
+}
+
+-(bool)allPopupViewsGone{
+    for(PopUpView *view in popupViews){
+        if(view.onView)
+            return NO;
+    }
+    return YES;
+}
+
+-(void)displayTapLabel{
+    if([self allPopupViewsGone]){
+        tapScreenLabel = [[SKLabelNode alloc] initWithFontNamed:@"Lunchtime Doubly So"];
+        tapScreenLabel.fontSize = 30;
+        tapScreenLabel.text = [NSString stringWithFormat:@"Tap Screen to Start"];
+        [self addChild:tapScreenLabel];
+        tutorialMode = NO;
+    }
+}
+
+-(void)displayNextPopup{
+    popupIndex++;
+    
+    //Still popups left
+    if(popupIndex < [popupViews count])
+        [self.view addSubview:popupViews[popupIndex]];
 }
 
 -(void)handleSwipes:(UISwipeGestureRecognizer *)recognizer {
@@ -129,7 +192,7 @@
 
 -(void)levelSetup:(int)startingScore{
     NSLog(@"IN game scene level setup");
-    [_gameDelegate setUpLevel:startingScore];
+    //[_gameDelegate setUpLevel:startingScore];
     
     //Add blocks and stars
     for (Block *block in currentLevel.blocks){
@@ -141,13 +204,14 @@
         [self addChild:star];
     }
     
-    tapScreenLabel = [[SKLabelNode alloc] initWithFontNamed:@"Lunchtime Doubly So"];
-    tapScreenLabel.fontSize = 30;
-    tapScreenLabel.text = [NSString stringWithFormat:@"Tap Screen to Start"];
-    [_gameDelegate setUpLevel:currentLevel.possibleScore];
+    if(!tutorialMode){
+        tapScreenLabel = [[SKLabelNode alloc] initWithFontNamed:@"Lunchtime Doubly So"];
+        tapScreenLabel.fontSize = 30;
+        tapScreenLabel.text = [NSString stringWithFormat:@"Tap Screen to Start"];
+        [self addChild:tapScreenLabel];
+    }
     
-    [self addChild:tapScreenLabel];
-    NSLog(@"Added tap screen to start label %@", tapScreenLabel);
+    [_gameDelegate setUpLevel:currentLevel.possibleScore];
     currentRoundPoints = 0;
 }
 
@@ -312,7 +376,7 @@
 
 - (void)touchUpAtPoint:(CGPoint)pos{
     NSLog(@"x: %f\ty: %f", pos.x, pos.y);
-    if(!currentLevel.levelBegan && !ball.physicsBody.dynamic){
+    if(!tutorialMode && !currentLevel.levelBegan && !ball.physicsBody.dynamic){
         ball.physicsBody.dynamic = YES; //Allow ball to move
         ballImpulse = CGVectorMake(0, -30);  //Set impulse for the ball
         [ball.physicsBody applyImpulse:ballImpulse];
@@ -393,5 +457,5 @@
         }
     }
 }
-
+    
 @end

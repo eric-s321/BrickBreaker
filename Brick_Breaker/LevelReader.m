@@ -46,7 +46,7 @@
     
     [xmlParser parse];
     
-    NSLog(@"Read in %lu levels", (unsigned long)[levels count]);
+    //NSLog(@"Read in %lu levels", (unsigned long)[levels count]);
 }
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI
@@ -71,13 +71,13 @@
     if(readingCoord)
         coordStr = string;
 
-    NSLog(@"chars are %@", string);
+    //NSLog(@"chars are %@", string);
 }
 
 -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI
                                                                         qualifiedName:(NSString *)qName{
     if([elementName isEqualToString:@"level"]){
-        NSLog(@"END OF LEVEL");
+     //   NSLog(@"END OF LEVEL");
         [self createLevel]; //creates a level object and add it to levels array
         
         //clear blocks and stars arrays for next level
@@ -110,7 +110,7 @@
 }
 
 -(void)createLevel{
-    NSLog(@"IN CREATE LEVEL");
+    //NSLog(@"IN CREATE LEVEL");
     
     Level *level = [[Level alloc] init];
     float x = 0.0;

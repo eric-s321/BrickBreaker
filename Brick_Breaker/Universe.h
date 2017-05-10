@@ -42,5 +42,6 @@
 -(void)setLevelIndex:(int)newIndex;
 -(BOOL)gameViewControllerIsNull;
 -(GameViewController *)getGameViewController;
+-(int)getLevelIndex;
 
 @end

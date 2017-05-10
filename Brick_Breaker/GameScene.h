@@ -7,6 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "PopUpView.h"
 
 @class Level;
 @class Universe;
@@ -21,12 +22,15 @@
 -(void)presentNoMoreLevelsController;
 @end
 
-@interface GameScene : SKScene <SKPhysicsContactDelegate>{
+@interface GameScene : SKScene <SKPhysicsContactDelegate, PopupDelegate>{
     Level *currentLevel;
     SKLabelNode *tapScreenLabel;
     Universe *universe;
     CGPoint PADDLE_START_POSITION;
     CGPoint BALL_START_POSITION;
+    bool tutorialMode;
+    NSMutableArray *popupViews;
+    int popupIndex;
 }
 
 @property (strong, nonatomic) id<GameDelegate> gameDelegate;

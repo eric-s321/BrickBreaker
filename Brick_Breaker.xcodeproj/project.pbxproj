@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B61F79B11EB45920009437D2 /* BlurredView.m in Sources */ = {isa = PBXBuildFile; fileRef = B61F79B01EB45920009437D2 /* BlurredView.m */; };
+		B6441AD31EC2BABF00665EF1 /* PopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6441AD21EC2BABF00665EF1 /* PopUpView.m */; };
 		B67C239E1EA862F100742831 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B67C239D1EA862F100742831 /* main.m */; };
 		B67C23A11EA862F100742831 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B67C23A01EA862F100742831 /* AppDelegate.m */; };
 		B67C23A31EA862F100742831 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B67C23A21EA862F100742831 /* GameScene.sks */; };
@@ -50,6 +51,8 @@
 /* Begin PBXFileReference section */
 		B61F79AF1EB45920009437D2 /* BlurredView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurredView.h; sourceTree = "<group>"; };
 		B61F79B01EB45920009437D2 /* BlurredView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurredView.m; sourceTree = "<group>"; };
+		B6441AD11EC2BABF00665EF1 /* PopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopUpView.h; sourceTree = "<group>"; };
+		B6441AD21EC2BABF00665EF1 /* PopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopUpView.m; sourceTree = "<group>"; };
 		B67C23991EA862F100742831 /* Brick_Breaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Brick_Breaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B67C239D1EA862F100742831 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B67C239F1EA862F100742831 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				B67C23AA1EA862F100742831 /* GameViewController.m */,
 				B6C6DF521EC1620100B3B98D /* MainMenuViewController.h */,
 				B6C6DF531EC1620100B3B98D /* MainMenuViewController.m */,
+				B6441AD11EC2BABF00665EF1 /* PopUpView.h */,
+				B6441AD21EC2BABF00665EF1 /* PopUpView.m */,
 				B61F79AF1EB45920009437D2 /* BlurredView.h */,
 				B61F79B01EB45920009437D2 /* BlurredView.m */,
 				B68368831EB2FB870007EB3B /* Universe.h */,
@@ -337,6 +342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B68368821EB2F1A80007EB3B /* Level.m in Sources */,
+				B6441AD31EC2BABF00665EF1 /* PopUpView.m in Sources */,
 				B6A09CD81EBEF65700323679 /* LevelReader.m in Sources */,
 				B67C23AB1EA862F100742831 /* GameViewController.m in Sources */,
 				B68368851EB2FB870007EB3B /* Universe.m in Sources */,

@@ -22,9 +22,11 @@
 @property (nonatomic) int numStarsLeft;
 @property (nonatomic) int possibleScore;
 
+/*
 +(Level *)level1;
 +(Level *)level2;
+*/
 
--(void)createLevel1;
+//-(void)createLevel1;
 
 @end

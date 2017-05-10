@@ -118,5 +118,9 @@ static Universe *singleton = nil;
 -(GameViewController *)getGameViewController{
     return gameViewController;
 }
+
+-(int)getLevelIndex{
+    return levelIndex;
+}
     
 @end

@@ -15,6 +15,7 @@
 @implementation Level
 @synthesize levelBegan, stars, blocks, starsCopy;
 
+/*
 +(Level *)level1{
     Level *level1 = [[Level alloc] init];
     [level1 createLevel1];
@@ -31,6 +32,7 @@
     level2.possibleScore = (int)[level2.blocks count] * BLOCK_VALUE;
     return level2;
 }
+*/
 
 -(id)init{
     self = [super init];
@@ -44,6 +46,7 @@
     return self;
 }
 
+/*
 -(void)createLevel2{
     
     int BLOCK_WIDTH = 150;
@@ -109,5 +112,6 @@
     [stars addObject:star1];
     
 }
+*/
 
 @end
