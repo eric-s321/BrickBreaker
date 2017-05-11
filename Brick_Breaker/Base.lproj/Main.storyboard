@@ -160,7 +160,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="179-w0-WBn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2302" y="1039"/>
+            <point key="canvasLocation" x="2498" y="1110"/>
         </scene>
         <!--Game Over View Controller-->
         <scene sceneID="s9y-aT-D1C">
@@ -410,6 +410,6 @@
         <image name="Brick_Breaker" width="748" height="1278"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hHQ-cb-zbc"/>
+        <segue reference="l8U-gL-3UU"/>
     </inferredMetricsTieBreakers>
 </document>

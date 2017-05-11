@@ -31,7 +31,7 @@ static Universe *singleton = nil;
         PADDLE_CATEGORY = 0x1 << 3;
         BORDER_CATEGORY = 0x1 << 4;
         STAR_CATEGORY = 0x1 << 5;
-        levelIndex = 5;
+        levelIndex = 0;
         NSLog(@"ALLOCATING THE ARRAY");
         highScores = [[NSMutableArray alloc] init];
         NSLog(@"high score address is %@", highScores);
