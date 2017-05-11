@@ -166,7 +166,7 @@
 
 -(void)presentNoMoreLevelsController{
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    UIViewController *noMoreLevelsView = [storyBoard instantiateViewControllerWithIdentifier:@"NoMoreLevelsController"];
+    UIViewController *noMoreLevelsView = [storyBoard instantiateViewControllerWithIdentifier:@"EnterScoreViewController"];
     [self presentViewController:noMoreLevelsView animated:YES completion:nil];
 }
 

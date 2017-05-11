@@ -27,6 +27,8 @@
         totalScoreDifference = finalTotalScoreInt - totalScoreInt;
         timeInterval = .005;
         
+        [Universe sharedInstance].currentScore = finalTotalScoreInt;
+        
         //Update total score in GameViewController
         //(Do this here incase to ensure it is before user hits continue
         [[Universe sharedInstance] incrementTotalScore:totalScoreDifference];

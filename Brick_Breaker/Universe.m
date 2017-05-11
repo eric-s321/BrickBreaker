@@ -13,7 +13,7 @@
 
 @implementation Universe
 @synthesize levels, NUM_LEVELS, BALL_CATEGORY, BOTTOM_CATEGORY, BLOCK_CATEGORY, PADDLE_CATEGORY,
-    BORDER_CATEGORY, STAR_CATEGORY, STAR_COLLISION, NON_STAR_COLLISION, tutorialShown;
+    BORDER_CATEGORY, STAR_CATEGORY, STAR_COLLISION, NON_STAR_COLLISION, tutorialShown1, tutorialShown2, currentScore;
 
 static Universe *singleton = nil;
 
@@ -31,7 +31,10 @@ static Universe *singleton = nil;
         PADDLE_CATEGORY = 0x1 << 3;
         BORDER_CATEGORY = 0x1 << 4;
         STAR_CATEGORY = 0x1 << 5;
-        levelIndex = 0;
+        levelIndex = 5;
+        NSLog(@"ALLOCATING THE ARRAY");
+        highScores = [[NSMutableArray alloc] init];
+        NSLog(@"high score address is %@", highScores);
         
         singleton = self;
     }
@@ -125,6 +128,7 @@ static Universe *singleton = nil;
 
 -(void)save{
     NSLog(@"In save");
+    NSLog(@"Universe address %@", self);
     
     NSArray *dirs = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask];
     NSError *err;
@@ -135,15 +139,14 @@ static Universe *singleton = nil;
     NSMutableData *data = [[NSMutableData alloc] init];
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
     
-    /*
     for (HighScore *highScore in highScores){
         NSLog(@"Name: %@   Score: %d", highScore.name, highScore.score);
     }
-     */
     
-   // [archiver encodeObject:highScores forKey:@"highScores"];
+    [archiver encodeObject:highScores forKey:@"highScores"];
     
-    [archiver encodeBool:tutorialShown forKey:@"tutorialShown"];
+    [archiver encodeBool:tutorialShown1 forKey:@"tutorialShown1"];
+    [archiver encodeBool:tutorialShown2 forKey:@"tutorialShown2"];
     [archiver finishEncoding];
     [data writeToURL:url atomically:YES];
     
@@ -167,13 +170,9 @@ static Universe *singleton = nil;
     NSKeyedUnarchiver *unarchiver;
     
     unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-//    highScores = [unarchiver decodeObjectForKey:@"highScores"];
-    tutorialShown = [unarchiver decodeObjectForKey:@"tutorialShown"];
-    
-    if(tutorialShown)
-        NSLog(@"ITS SHOWN");
-    else
-        NSLog(@"ITS NOT SHOWN");
+    highScores = [unarchiver decodeObjectForKey:@"highScores"];
+    tutorialShown1 = [unarchiver decodeObjectForKey:@"tutorialShown1"];
+    tutorialShown2 = [unarchiver decodeObjectForKey:@"tutorialShown2"];
     
     NSLog(@"Just loaded high scores:");
 /*
@@ -183,4 +182,27 @@ static Universe *singleton = nil;
 */
     
 }
+
+-(void)addHighScore:(HighScore *) highScore{
+    NSLog(@"Beginning of adding score");
+    NSLog(@"Universe address %@", self);
+    NSLog(@"high score address is %@", highScores);
+//    highScores = [[NSMutableArray alloc] init];
+    [self load];  //Load first so we dont overwrite old scores
+    NSLog(@"Entering high score name: %@\tscore:%d", highScore.name, highScore.score);
+    if(highScores){
+        [highScores addObject:highScore];
+        [highScores addObject:@"poop"];
+    }
+    else
+        NSLog(@"WTF");
+    NSLog(@"highscores count is %lu", (unsigned long)[highScores count]);
+    [self save];
+    NSLog(@"End of adding score");
+}
+
+-(NSMutableArray *)getHighScores{
+    return highScores;
+}
+
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GameScene.h"
+#import "HighScore.h"
 
 @class GameViewController;
 @class Level;
@@ -16,11 +17,13 @@
 @interface Universe : NSObject{
     GameViewController *gameViewController;
     int levelIndex;
-    bool tutorialShown;
+    NSMutableArray *highScores;
 }
 
 @property (strong, nonatomic) id<GameDelegate> gameDelegate;
-@property (nonatomic) BOOL tutorialShown;
+@property (nonatomic) int currentScore;
+@property (nonatomic) BOOL tutorialShown1;
+@property (nonatomic) BOOL tutorialShown2;
 @property (strong, nonatomic) NSArray *levels;
 @property (nonatomic) int NUM_LEVELS;
 @property (nonatomic) UInt32 BALL_CATEGORY;
@@ -47,5 +50,7 @@
 -(int)getLevelIndex;
 -(void)load;
 -(void)save;
+-(void)addHighScore:(HighScore *) highScore;
+-(NSMutableArray *)getHighScores;
 
 @end

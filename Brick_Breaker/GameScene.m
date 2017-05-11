@@ -109,19 +109,20 @@
     
     
     ////////----------------TUTORIAL CODE-----------------------////////////////
-    if(![[Universe sharedInstance] tutorialShown]){
+    if(![[Universe sharedInstance] tutorialShown1]){
         tutorialMode = NO;
         popupViews = [[NSMutableArray alloc] init];
         popupIndex = -1;
         
+        int viewHeight = 125;
+        int viewWidth = 175;
+        
+        PopUpView *view;
         if([[Universe sharedInstance] getLevelIndex] == 0){
             tutorialMode = YES;
             
-            int viewHeight = 125;
-            int viewWidth = 175;
-            
             CGRect frame = CGRectMake(CGRectGetMidX(self.view.frame) - viewWidth/2, CGRectGetMidY(self.view.frame) - viewHeight/2, viewWidth, viewHeight);
-            PopUpView *view = [[PopUpView alloc] initWithFrame:frame message:@"Collect all the stars while avoiding the blocks!" withArrow:NO arrowPosition:ARROW_NO_POSITION fontSize:20];
+            view = [[PopUpView alloc] initWithFrame:frame message:@"Collect all the stars while avoiding the blocks!" withArrow:NO arrowPosition:ARROW_NO_POSITION fontSize:20];
             [view setPopupDelegate:self];
             [popupViews addObject:view];
             
@@ -134,7 +135,10 @@
             view = [[PopUpView alloc] initWithFrame:frame message:@"Total score. Gain 500 points for every star you collect and 100 for any block left intact" withArrow:YES arrowPosition:ARROW_BOTTOM_RIGHT fontSize:18];
             [view setPopupDelegate:self];
             [popupViews addObject:view];
+            
+            [[Universe sharedInstance] setTutorialShown1:YES];
         }
+        
         
         //If there are popups to be shown show the first one
         if([popupViews count] > 0)
@@ -148,7 +152,6 @@
             return NO;
     }
     
-    [[Universe sharedInstance] setTutorialShown:YES];
     return YES;
 }
 
@@ -196,6 +199,25 @@
     NSLog(@"IN game scene level setup");
     //[_gameDelegate setUpLevel:startingScore];
     
+    if(![[Universe sharedInstance] tutorialShown2] &&[[Universe sharedInstance] getLevelIndex] == 1){
+        tutorialMode = YES;
+        int viewHeight = 125;
+        int viewWidth = 175;
+        
+        CGRect frame = CGRectMake(CGRectGetMidX(self.view.frame) - viewWidth/2, CGRectGetMidY(self.view.frame) - viewHeight/2, viewWidth, viewHeight);
+        PopUpView *view = [[PopUpView alloc] initWithFrame:frame message:@"Hit further from the center of the paddle to move the ball in that direction" withArrow:NO arrowPosition:ARROW_NO_POSITION fontSize:18];
+        [view setPopupDelegate:self];
+        [popupViews addObject:view];
+        
+        view = [[PopUpView alloc] initWithFrame:frame message:@"Swipe two fingers up, down, left, or right to move the ball" withArrow:NO arrowPosition:ARROW_NO_POSITION fontSize:18];
+        [view setPopupDelegate:self];
+        [popupViews addObject:view];
+        [[Universe sharedInstance] setTutorialShown2:YES];
+        
+        popupIndex--; //On the first tutorial we skipped the first of these 2 popups
+        if([popupViews count] > 0)
+            [self displayNextPopup];
+    }
     //Add blocks and stars
     for (Block *block in currentLevel.blocks){
         NSLog(@"Adding block");
