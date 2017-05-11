@@ -109,37 +109,37 @@
     
     
     ////////----------------TUTORIAL CODE-----------------------////////////////
-    tutorialMode = NO;
-    popupViews = [[NSMutableArray alloc] init];
-    popupIndex = -1;
-    
-    if([[Universe sharedInstance] getLevelIndex] == 0){
-        tutorialMode = YES;
+    if(![[Universe sharedInstance] tutorialShown]){
+        tutorialMode = NO;
+        popupViews = [[NSMutableArray alloc] init];
+        popupIndex = -1;
         
-        int viewHeight = 125;
-        int viewWidth = 175;
+        if([[Universe sharedInstance] getLevelIndex] == 0){
+            tutorialMode = YES;
+            
+            int viewHeight = 125;
+            int viewWidth = 175;
+            
+            CGRect frame = CGRectMake(CGRectGetMidX(self.view.frame) - viewWidth/2, CGRectGetMidY(self.view.frame) - viewHeight/2, viewWidth, viewHeight);
+            PopUpView *view = [[PopUpView alloc] initWithFrame:frame message:@"Collect all the stars while avoiding the blocks!" withArrow:NO arrowPosition:ARROW_NO_POSITION fontSize:20];
+            [view setPopupDelegate:self];
+            [popupViews addObject:view];
+            
+            frame = CGRectMake(frame.origin.x, self.view.frame.size.height - viewHeight - SCORE_LABEL_HEIGHT, frame.size.width, frame.size.height);
+            view = [[PopUpView alloc] initWithFrame:frame message:@"Lose 100 of these points for each block you destory" withArrow:YES arrowPosition:ARROW_BOTTOM_CENTER fontSize:18];
+            [view setPopupDelegate:self];
+            [popupViews addObject:view];
+            
+            frame = CGRectMake(self.view.frame.size.width - frame.size.width, frame.origin.y-100, frame.size.width, frame.size.height + 100);
+            view = [[PopUpView alloc] initWithFrame:frame message:@"Total score. Gain 500 points for every star you collect and 100 for any block left intact" withArrow:YES arrowPosition:ARROW_BOTTOM_RIGHT fontSize:18];
+            [view setPopupDelegate:self];
+            [popupViews addObject:view];
+        }
         
-        CGRect frame = CGRectMake(CGRectGetMidX(self.view.frame) - viewWidth/2, CGRectGetMidY(self.view.frame) - viewHeight/2, viewWidth, viewHeight);
-        PopUpView *view = [[PopUpView alloc] initWithFrame:frame message:@"Collect all the stars while avoiding the blocks!" withArrow:NO arrowPosition:ARROW_NO_POSITION fontSize:20];
-        [view setPopupDelegate:self];
-        [popupViews addObject:view];
-        
-        frame = CGRectMake(frame.origin.x, self.view.frame.size.height - viewHeight - SCORE_LABEL_HEIGHT, frame.size.width, frame.size.height);
-        view = [[PopUpView alloc] initWithFrame:frame message:@"Lose 100 of these points for each block you destory" withArrow:YES arrowPosition:ARROW_BOTTOM_CENTER fontSize:18];
-        [view setPopupDelegate:self];
-        [popupViews addObject:view];
-        
-        frame = CGRectMake(self.view.frame.size.width - frame.size.width, frame.origin.y-100, frame.size.width, frame.size.height + 100);
-        view = [[PopUpView alloc] initWithFrame:frame message:@"Total score. Gain 500 points for every star you collect and 100 for any block left intact" withArrow:YES arrowPosition:ARROW_BOTTOM_RIGHT fontSize:18];
-        [view setPopupDelegate:self];
-        [popupViews addObject:view];
+        //If there are popups to be shown show the first one
+        if([popupViews count] > 0)
+            [self displayNextPopup];
     }
-    
-    
-    
-    //If there are popups to be shown show the first one
-    if([popupViews count] > 0)
-        [self displayNextPopup];
 }
 
 -(bool)allPopupViewsGone{
@@ -147,6 +147,8 @@
         if(view.onView)
             return NO;
     }
+    
+    [[Universe sharedInstance] setTutorialShown:YES];
     return YES;
 }
 

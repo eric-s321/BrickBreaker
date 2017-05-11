@@ -16,9 +16,11 @@
 @interface Universe : NSObject{
     GameViewController *gameViewController;
     int levelIndex;
+    bool tutorialShown;
 }
 
 @property (strong, nonatomic) id<GameDelegate> gameDelegate;
+@property (nonatomic) BOOL tutorialShown;
 @property (strong, nonatomic) NSArray *levels;
 @property (nonatomic) int NUM_LEVELS;
 @property (nonatomic) UInt32 BALL_CATEGORY;
@@ -43,5 +45,7 @@
 -(BOOL)gameViewControllerIsNull;
 -(GameViewController *)getGameViewController;
 -(int)getLevelIndex;
+-(void)load;
+-(void)save;
 
 @end

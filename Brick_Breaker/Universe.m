@@ -13,7 +13,7 @@
 
 @implementation Universe
 @synthesize levels, NUM_LEVELS, BALL_CATEGORY, BOTTOM_CATEGORY, BLOCK_CATEGORY, PADDLE_CATEGORY,
-    BORDER_CATEGORY, STAR_CATEGORY, STAR_COLLISION, NON_STAR_COLLISION;
+    BORDER_CATEGORY, STAR_CATEGORY, STAR_COLLISION, NON_STAR_COLLISION, tutorialShown;
 
 static Universe *singleton = nil;
 
@@ -31,7 +31,7 @@ static Universe *singleton = nil;
         PADDLE_CATEGORY = 0x1 << 3;
         BORDER_CATEGORY = 0x1 << 4;
         STAR_CATEGORY = 0x1 << 5;
-        levelIndex = 4;
+        levelIndex = 0;
         
         singleton = self;
     }
@@ -130,7 +130,7 @@ static Universe *singleton = nil;
     NSError *err;
     [[NSFileManager defaultManager] createDirectoryAtURL:[dirs objectAtIndex:0] withIntermediateDirectories:YES attributes:nil error:&err];
     
-    NSURL *url = [NSURL URLWithString:@"high_scores.archive" relativeToURL:[dirs objectAtIndex:0]];
+    NSURL *url = [NSURL URLWithString:@"appData.archive" relativeToURL:[dirs objectAtIndex:0]];
     
     NSMutableData *data = [[NSMutableData alloc] init];
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
@@ -143,6 +143,7 @@ static Universe *singleton = nil;
     
    // [archiver encodeObject:highScores forKey:@"highScores"];
     
+    [archiver encodeBool:tutorialShown forKey:@"tutorialShown"];
     [archiver finishEncoding];
     [data writeToURL:url atomically:YES];
     
@@ -156,7 +157,7 @@ static Universe *singleton = nil;
     NSArray *dirs = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask];
     NSError *err;
     [[NSFileManager defaultManager] createDirectoryAtURL:[dirs objectAtIndex:0] withIntermediateDirectories:YES attributes:nil error:&err];
-    NSURL *url = [NSURL URLWithString:@"high_scores.archive" relativeToURL:[dirs objectAtIndex:0]];
+    NSURL *url = [NSURL URLWithString:@"appData.archive" relativeToURL:[dirs objectAtIndex:0]];
     
     NSData *data = [NSData dataWithContentsOfURL:url];
     
@@ -167,6 +168,12 @@ static Universe *singleton = nil;
     
     unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
 //    highScores = [unarchiver decodeObjectForKey:@"highScores"];
+    tutorialShown = [unarchiver decodeObjectForKey:@"tutorialShown"];
+    
+    if(tutorialShown)
+        NSLog(@"ITS SHOWN");
+    else
+        NSLog(@"ITS NOT SHOWN");
     
     NSLog(@"Just loaded high scores:");
 /*
@@ -176,5 +183,4 @@ static Universe *singleton = nil;
 */
     
 }
-
 @end

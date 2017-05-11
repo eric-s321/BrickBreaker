@@ -59,8 +59,7 @@
      
     [[Universe sharedInstance] setGameViewController:(GameViewController *)newGameController];
     
-    //---------------PUT ME BACK----------------?///////////////
-   // [[Universe sharedInstance] setLevelIndex:0];
+    [[Universe sharedInstance] setLevelIndex:0];
     
     [[Universe sharedInstance] setLevel];
     //set all levels to did not begin

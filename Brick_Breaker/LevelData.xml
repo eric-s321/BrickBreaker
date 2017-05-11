@@ -244,4 +244,52 @@
             </star>
         </stars>
     </level>
+    <level num="5">
+        <blocks>
+            <block>
+                <x>-75</x>
+                <y>620</y>
+                <width>150</width>
+                <height>30</height>
+            </block>
+            <block>
+                <x>0</x>
+                <y>480</y>
+                <width>150</width>
+                <height>30</height>
+            </block>
+            <block>
+                <x>-250</x>
+                <y>250</y>
+                <width>150</width>
+                <height>30</height>
+            </block>
+            <block>
+                <x>-187</x>
+                <y>-200</y>
+                <width>200</width>
+                <height>30</height>
+            </block>
+            <block>
+                <x>187</x>
+                <y>-200</y>
+                <width>200</width>
+                <height>30</height>
+            </block>
+        </blocks>
+        <stars>
+            <star>
+                <x>-187</x>
+                <y>-260</y>
+            </star>
+            <star>
+                <x>187</x>
+                <y>-260</y>
+            </star>
+            <star>
+                <x>0</x>
+                <y>550</y>
+            </star>
+        </stars>
+    </level>
 </game>
