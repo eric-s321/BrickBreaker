@@ -222,6 +222,10 @@
     for (Block *block in currentLevel.blocks){
         NSLog(@"Adding block");
         [self addChild:block];
+        
+        //Start moving blocks with movement
+        if(block.movement != NO_MOVEMENT)
+            [block move];
     }
     for (SKSpriteNode *star in currentLevel.stars){
         NSLog(@"Adding star");
@@ -399,7 +403,7 @@
 }
 
 - (void)touchUpAtPoint:(CGPoint)pos{
-    NSLog(@"x: %f\ty: %f", pos.x, pos.y);
+    //NSLog(@"x: %f\ty: %f", pos.x, pos.y);
     if(!tutorialMode && !currentLevel.levelBegan && !ball.physicsBody.dynamic){
         ball.physicsBody.dynamic = YES; //Allow ball to move
         ballImpulse = CGVectorMake(0, -30);  //Set impulse for the ball

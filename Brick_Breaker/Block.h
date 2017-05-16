@@ -8,13 +8,23 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+typedef enum{
+    NO_MOVEMENT,
+    SQUARE,
+    LEFT_RIGHT,
+    UP_DOWN
+}Movement;
+
 @class Universe;
 
 @interface Block : SKSpriteNode{
     Universe *universe;
 }
 
--(id)initWithRect:(CGRect)rect color:(UIColor *)color;
+@property (nonatomic) Movement movement;
+
+-(id)initWithRect:(CGRect)rect color:(UIColor *)color movement:(Movement)movement;
 -(void)breakBlock;
+-(void)move;
 
 @end

@@ -161,6 +161,7 @@
                 <y>400</y>
                 <width>250</width>
                 <height>250</height>
+                <movement>SQUARE</movement>
             </block>
             <block>
                 <x>-250</x>

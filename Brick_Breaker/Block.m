@@ -11,7 +11,7 @@
 
 @implementation Block
 
--(id)initWithRect:(CGRect)rect color:(UIColor *)color{
+-(id)initWithRect:(CGRect)rect color:(UIColor *)color movement:(Movement)movement{
     self = [super init];
     
     if(self){
@@ -22,6 +22,7 @@
         self.physicsBody.dynamic = NO;
         universe = [Universe sharedInstance];
         self.physicsBody.categoryBitMask = universe.BLOCK_CATEGORY;
+        self.movement = movement;
     }
     
     return self;
@@ -51,6 +52,20 @@
     [brokenBlock runAction:[SKAction sequence:@[wait,remove]]];
     [self removeFromParent];
     [pointsLabel runAction:[SKAction sequence:@[[SKAction fadeOutWithDuration:1],remove]]];
+}
+
+-(void)move{
+    if (self.movement == SQUARE){
+        float squareSide = self.scene.size.width / 6;
+        float time = 2.0;
+        SKAction *halfLeft = [SKAction moveByX:-(squareSide/2) y:0 duration:time/2];
+        SKAction *down = [SKAction moveByX:0 y:-squareSide duration:time];
+        SKAction *right = [SKAction moveByX:squareSide y:0 duration:time];
+        SKAction *up = [SKAction moveByX:0 y:squareSide duration:time];
+        SKAction *square = [SKAction sequence:@[halfLeft,down,right,up, halfLeft]];
+        
+        [self runAction:[SKAction repeatActionForever:square]];
+    }
 }
 
 @end

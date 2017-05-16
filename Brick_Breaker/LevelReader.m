@@ -55,7 +55,7 @@
         coordDict = [[NSMutableDictionary alloc] init];
     
     if([elementName isEqualToString:@"x"] || [elementName isEqualToString:@"y"] || [elementName isEqualToString:@"width"] ||
-        [elementName isEqualToString:@"height"])
+        [elementName isEqualToString:@"height"] || [elementName isEqualToString:@"movement"])
         readingCoord = YES;
     else
         readingCoord = NO;
@@ -98,7 +98,8 @@
             [stars addObject:coordDict];
     }
     else if ([elementName isEqualToString:@"x"] || [elementName isEqualToString:@"y"] ||
-             [elementName isEqualToString:@"width"] || [elementName isEqualToString:@"height"]){
+             [elementName isEqualToString:@"width"] || [elementName isEqualToString:@"height"] ||
+             [elementName isEqualToString:@"movement"]){
         [coordDict setObject:coordStr forKey:elementName];
     }
     /*
@@ -117,6 +118,7 @@
     float y = 0.0;
     float width = 0.0;
     float height = 0.0;
+    Movement movement = NO_MOVEMENT;
     
     for(NSMutableDictionary *dict in blocks){
         for(id key in dict){
@@ -128,8 +130,18 @@
                 width = [[dict objectForKey:key] floatValue];
             else if([key isEqualToString:@"height"])
                 height = [[dict objectForKey:key] floatValue];
+            else if([key isEqualToString:@"movement"]){
+                NSString *movementString = [dict objectForKey:key];
+                if([movementString isEqualToString:@"SQUARE"])
+                    movement = SQUARE;
+                else if([movementString isEqualToString:@"LEFT_RIGHT"])
+                    movement = LEFT_RIGHT;
+                else if([movementString isEqualToString:@"UP_DOWN"])
+                    movement = UP_DOWN;
+            }
         }
-        Block *block = [[Block alloc] initWithRect:CGRectMake(x, y, width, height) color:[UIColor redColor]];
+        Block *block = [[Block alloc] initWithRect:CGRectMake(x, y, width, height) color:[UIColor redColor] movement:movement];
+        movement = NO_MOVEMENT;
         [level.blocks addObject:block];
     }
     
