@@ -176,7 +176,7 @@
 }
 
 -(void)handleSwipes:(UISwipeGestureRecognizer *)recognizer {
-    int swipePower = 20;
+    int swipePower = 10;
     switch ([recognizer direction]) {
         case UISwipeGestureRecognizerDirectionLeft:
             [ball.physicsBody applyImpulse:CGVectorMake(-swipePower, 0)];
@@ -345,17 +345,22 @@
 
 - (void)boundVelocity{
     NSLog(@"BEFORE\nBall velocity dx = %f dy = %f", ball.physicsBody.velocity.dx, ball.physicsBody.velocity.dy);
-    if(ball.physicsBody.velocity.dx > 500){
-        ball.physicsBody.velocity = CGVectorMake(500, ball.physicsBody.velocity.dy);
+    int X_MAX = 350;
+    int X_MIN = -X_MAX;
+    int Y_MAX = 400;
+    int Y_MIN = -Y_MAX;
+    
+    if(ball.physicsBody.velocity.dx > X_MAX){
+        ball.physicsBody.velocity = CGVectorMake(X_MAX, ball.physicsBody.velocity.dy);
     }
-    else if(ball.physicsBody.velocity.dx < -500){
-        ball.physicsBody.velocity = CGVectorMake(-500, ball.physicsBody.velocity.dy);
+    else if(ball.physicsBody.velocity.dx < X_MIN){
+        ball.physicsBody.velocity = CGVectorMake(X_MIN, ball.physicsBody.velocity.dy);
     }
     
-    if(ball.physicsBody.velocity.dy > 550)
-        ball.physicsBody.velocity = CGVectorMake(ball.physicsBody.velocity.dx, 550);
-    if(ball.physicsBody.velocity.dy < -550){
-        ball.physicsBody.velocity = CGVectorMake(ball.physicsBody.velocity.dx, -550);
+    if(ball.physicsBody.velocity.dy > Y_MAX)
+        ball.physicsBody.velocity = CGVectorMake(ball.physicsBody.velocity.dx, Y_MAX);
+    if(ball.physicsBody.velocity.dy < Y_MIN){
+        ball.physicsBody.velocity = CGVectorMake(ball.physicsBody.velocity.dx, Y_MIN);
     }
     NSLog(@"AFTER\nBall velocity dx = %f dy = %f", ball.physicsBody.velocity.dx, ball.physicsBody.velocity.dy);
 }
