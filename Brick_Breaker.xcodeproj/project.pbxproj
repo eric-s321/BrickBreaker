@@ -12,6 +12,7 @@
 		B6441AD91EC3FE0300665EF1 /* HighScore.m in Sources */ = {isa = PBXBuildFile; fileRef = B6441AD81EC3FE0300665EF1 /* HighScore.m */; };
 		B6441ADC1EC3FE1100665EF1 /* HighScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6441ADB1EC3FE1100665EF1 /* HighScoreViewController.m */; };
 		B6441ADF1EC4029300665EF1 /* GameOverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6441ADE1EC4029300665EF1 /* GameOverViewController.m */; };
+		B67B6B4E1ED6251A002B318D /* LevelDataNew.xml in Resources */ = {isa = PBXBuildFile; fileRef = B67B6B4D1ED6251A002B318D /* LevelDataNew.xml */; };
 		B67C239E1EA862F100742831 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B67C239D1EA862F100742831 /* main.m */; };
 		B67C23A11EA862F100742831 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B67C23A01EA862F100742831 /* AppDelegate.m */; };
 		B67C23A31EA862F100742831 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B67C23A21EA862F100742831 /* GameScene.sks */; };
@@ -62,6 +63,7 @@
 		B6441ADB1EC3FE1100665EF1 /* HighScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoreViewController.m; sourceTree = "<group>"; };
 		B6441ADD1EC4029300665EF1 /* GameOverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverViewController.h; sourceTree = "<group>"; };
 		B6441ADE1EC4029300665EF1 /* GameOverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverViewController.m; sourceTree = "<group>"; };
+		B67B6B4D1ED6251A002B318D /* LevelDataNew.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LevelDataNew.xml; sourceTree = "<group>"; };
 		B67C23991EA862F100742831 /* Brick_Breaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Brick_Breaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B67C239D1EA862F100742831 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B67C239F1EA862F100742831 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				B67C239C1EA862F100742831 /* Supporting Files */,
 				B67CDB761EADC42700B7B433 /* Assets.xcassets */,
 				B6A09CD41EBEF37D00323679 /* LevelData.xml */,
+				B67B6B4D1ED6251A002B318D /* LevelDataNew.xml */,
 			);
 			path = Brick_Breaker;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				B67C23AE1EA862F100742831 /* Main.storyboard in Resources */,
 				B67C23A31EA862F100742831 /* GameScene.sks in Resources */,
 				B67C23B31EA862F100742831 /* LaunchScreen.storyboard in Resources */,
+				B67B6B4E1ED6251A002B318D /* LevelDataNew.xml in Resources */,
 				B67C23A51EA862F100742831 /* Actions.sks in Resources */,
 				B67CDB781EADC42700B7B433 /* Assets.xcassets in Resources */,
 				B6A09CD51EBEF37D00323679 /* LevelData.xml in Resources */,

@@ -27,6 +27,7 @@
     SKLabelNode *tapScreenLabel;
     Universe *universe;
     CGPoint PADDLE_START_POSITION;
+    CGSize PADDLE_SIZE;
     CGPoint BALL_START_POSITION;
     bool tutorialMode;
     NSMutableArray *popupViews;

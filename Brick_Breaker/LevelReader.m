@@ -10,8 +10,8 @@
 #import "Block.h"
 #import "Level.h"
 
-#define STAR_WIDTH 75
-#define STAR_HEIGHT 75
+#define STAR_WIDTH 38
+#define STAR_HEIGHT 38
 #define STAR_VALUE 500
 #define BLOCK_VALUE 100
 
@@ -28,7 +28,7 @@
 @synthesize levels, numLevels;
 
 -(void)startParsing{
-    NSString *xmlPath = [[NSBundle mainBundle] pathForResource:@"LevelData" ofType:@"xml"];
+    NSString *xmlPath = [[NSBundle mainBundle] pathForResource:@"LevelDataNew" ofType:@"xml"];
     NSData *xmlData = [NSData dataWithContentsOfFile:xmlPath];
     NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:xmlData];
     [xmlParser setDelegate:self];

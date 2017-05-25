@@ -37,16 +37,18 @@
     self.physicsWorld.contactDelegate = self;
     
     paddle = (SKSpriteNode *)[self childNodeWithName:@"paddle"];
-    float yCoord = (self.view.frame.size.height - paddle.frame.size.height*2.5) * -1;
+    float yCoord = (self.view.frame.size.height/2 - paddle.frame.size.height*2) * -1;
     PADDLE_START_POSITION = CGPointMake(0, yCoord);
     paddle.position = PADDLE_START_POSITION;
+    PADDLE_SIZE = CGSizeMake(self.size.width / 3, 15);
+    paddle.size = PADDLE_SIZE;
     paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:paddle.frame.size];
     paddle.physicsBody.dynamic = NO;
     
-    ball = [SKShapeNode shapeNodeWithCircleOfRadius:20];
+    ball = [SKShapeNode shapeNodeWithCircleOfRadius:10];
     ball.strokeColor = [UIColor greenColor];
     ball.fillColor = [UIColor greenColor];
-    BALL_START_POSITION = CGPointMake(0, self.frame.size.height/8);
+    BALL_START_POSITION = CGPointMake(0, self.size.height/8);
     ball.position = BALL_START_POSITION;
     
     ball.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:20];
@@ -158,7 +160,7 @@
 -(void)displayTapLabel{
     if([self allPopupViewsGone]){
         tapScreenLabel = [[SKLabelNode alloc] initWithFontNamed:@"Lunchtime Doubly So"];
-        tapScreenLabel.fontSize = 30;
+        tapScreenLabel.fontSize = 20;
         tapScreenLabel.text = [NSString stringWithFormat:@"Tap Screen to Start"];
         [self addChild:tapScreenLabel];
         tutorialMode = NO;
@@ -234,7 +236,7 @@
     
     if(!tutorialMode){
         tapScreenLabel = [[SKLabelNode alloc] initWithFontNamed:@"Lunchtime Doubly So"];
-        tapScreenLabel.fontSize = 30;
+        tapScreenLabel.fontSize = 20;
         tapScreenLabel.text = [NSString stringWithFormat:@"Tap Screen to Start"];
         [self addChild:tapScreenLabel];
     }
@@ -403,12 +405,11 @@
 }
 
 - (void)touchUpAtPoint:(CGPoint)pos{
-    //NSLog(@"x: %f\ty: %f", pos.x, pos.y);
+    NSLog(@"x: %f\ty: %f", pos.x, pos.y);
     if(!tutorialMode && !currentLevel.levelBegan && !ball.physicsBody.dynamic){
         ball.physicsBody.dynamic = YES; //Allow ball to move
-        ballImpulse = CGVectorMake(0, -30);  //Set impulse for the ball
+        ballImpulse = CGVectorMake(0, -15);  //Set impulse for the ball
         [ball.physicsBody applyImpulse:ballImpulse];
-        NSLog(@"Removing tap screen label %@", tapScreenLabel);
         [tapScreenLabel removeFromParent];
     }
 }

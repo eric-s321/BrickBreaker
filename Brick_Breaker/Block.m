@@ -43,7 +43,7 @@
     
     
     SKLabelNode *pointsLabel = [[SKLabelNode alloc] initWithFontNamed:@"Lunchtime Doubly So"];
-    pointsLabel.fontSize = 30;
+    pointsLabel.fontSize = 15;
     pointsLabel.text = [NSString stringWithFormat:@"-%d", 100];
     pointsLabel.position = CGPointMake(self.position.x, self.position.y + self.size.height/2);
     
