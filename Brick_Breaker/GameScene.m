@@ -468,6 +468,7 @@
      * Prevent ball from getting stuck
      */
     if(currentLevel.levelBegan){
+        /*
         if(ball.physicsBody.velocity.dx == 0){
             if(ball.position.x < 0){
                 NSLog(@"x is 0 on left");
@@ -478,6 +479,7 @@
                 [ball.physicsBody applyImpulse:CGVectorMake(-5, 0)];
             }
         }
+        */
         
         if(ball.physicsBody.velocity.dy == 0){
             if(ball.position.y < 0){ //Ball against the bottom of screen
