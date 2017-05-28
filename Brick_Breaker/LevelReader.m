@@ -9,11 +9,30 @@
 #import "LevelReader.h"
 #import "Block.h"
 #import "Level.h"
+#import "Universe.h"
+#import "GameViewController.h"
 
 #define STAR_WIDTH 38
 #define STAR_HEIGHT 38
 #define STAR_VALUE 500
 #define BLOCK_VALUE 100
+
+#define IPHONE_6S_MIN_X -187.5
+#define IPHONE_6S_MAX_X 187.5
+#define IPHONE_6S_MIN_Y -333.5
+#define IPHONE_6S_MAX_Y 333.5
+
+typedef struct{
+    int x;
+    int y;
+    float width;
+    float height;
+} BlockCoord;
+
+typedef struct{
+    int x;
+    int y;
+} StarCoord;
 
 @implementation LevelReader{
     NSMutableArray *blocks;
@@ -140,7 +159,19 @@
                     movement = UP_DOWN;
             }
         }
-        Block *block = [[Block alloc] initWithRect:CGRectMake(x, y, width, height) color:[UIColor redColor] movement:movement];
+        
+        //Store 6s scaled coordinates in BlockCoord
+        BlockCoord oldBlockCoord;
+        oldBlockCoord.x = x;
+        oldBlockCoord.y = y;
+        oldBlockCoord.width = width;
+        oldBlockCoord.height = height;
+        
+        //Get new coordinates/size scaled to the screen of the device
+        BlockCoord newBlockCoord = [self convertCoordinates:oldBlockCoord];
+        
+        Block *block = [[Block alloc] initWithRect:CGRectMake(newBlockCoord.x, newBlockCoord.y,
+                                newBlockCoord.width, newBlockCoord.height) color:[UIColor redColor] movement:movement];
         movement = NO_MOVEMENT;
         [level.blocks addObject:block];
     }
@@ -154,13 +185,59 @@
                 y = [[dict objectForKey:key] floatValue];
             }
         }
-        Star *star = [[Star alloc] initWithImageNamed:@"star" intRect:CGRectMake(x, y, STAR_WIDTH, STAR_HEIGHT) withValue:STAR_VALUE];
+        
+        StarCoord oldStarCoord;
+        oldStarCoord.x = x;
+        oldStarCoord.y = y;
+        
+        StarCoord newStarCoord = [self converCoordinates:oldStarCoord];
+        
+        Star *star = [[Star alloc] initWithImageNamed:@"star" intRect:CGRectMake(newStarCoord.x, newStarCoord.y, STAR_WIDTH, STAR_HEIGHT) withValue:STAR_VALUE];
         [level.stars addObject:star];
     }
     
     level.numStarsLeft = (int)[level.stars count];
     level.possibleScore = (int)[level.blocks count] * BLOCK_VALUE;
     [levels addObject:level];
+}
+
+
+-(BlockCoord)convertCoordinates:(BlockCoord) blockCoord{
+    float screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    float screenHeight = [[UIScreen mainScreen] bounds].size.height;
+    
+    float maxX = screenWidth / 2;
+    float maxY = screenHeight / 2;
+    
+    float xRatio = blockCoord.x / IPHONE_6S_MAX_X;
+    float yRatio = blockCoord.y / IPHONE_6S_MAX_Y;
+    float widthRatio = blockCoord.width / (IPHONE_6S_MAX_X * 2);
+    float heightRatio = blockCoord.height / (IPHONE_6S_MAX_Y * 2);
+
+    BlockCoord newBlockCoord;
+    newBlockCoord.x = maxX * xRatio;
+    newBlockCoord.y = maxY * yRatio;
+    newBlockCoord.width = screenWidth * widthRatio;
+    newBlockCoord.height = screenHeight * heightRatio;
+    
+    return newBlockCoord;
+}
+
+-(StarCoord)converCoordinates:(StarCoord) starCoord{
+    float screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    float screenHeight = [[UIScreen mainScreen] bounds].size.height;
+
+    float maxX = screenWidth / 2;
+    float maxY = screenHeight / 2;
+    
+    float xRatio = starCoord.x / IPHONE_6S_MAX_X;
+    float yRatio = starCoord.y / IPHONE_6S_MAX_Y;
+    
+    StarCoord newStarCoord;
+    newStarCoord.x = maxX * xRatio;
+    newStarCoord.y = maxY * yRatio;
+    
+    return newStarCoord;
 }
 
 @end
