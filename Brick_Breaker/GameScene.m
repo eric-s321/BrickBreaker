@@ -40,7 +40,7 @@
     float yCoord = (self.view.frame.size.height/2 - paddle.frame.size.height*2) * -1;
     PADDLE_START_POSITION = CGPointMake(0, yCoord);
     paddle.position = PADDLE_START_POSITION;
-    PADDLE_SIZE = CGSizeMake(self.size.width / 3, 15);
+    PADDLE_SIZE = CGSizeMake(self.size.width / 3, 20);
     paddle.size = PADDLE_SIZE;
     paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:paddle.frame.size];
     paddle.physicsBody.dynamic = NO;
